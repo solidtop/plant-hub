@@ -1,20 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
+import { loginFormSchema } from "@/utils/validations";
 import bcrypt from "bcrypt";
 import jsonwebtoken from "jsonwebtoken";
 
-const loginSchema = z.object({
-  username: z.string().transform((value) => value.replaceAll(" ", "")),
-  password: z.string().min(8).max(20),
-});
-
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const result = loginSchema.safeParse(body);
+  const result = loginFormSchema.safeParse(body);
 
   if (!result.success) {
-    const errors = result.error.format();
-    return Response.json(errors, { status: 401 });
+    const errors = result.error.errors.map((error) => {
+      return {
+        field: error.path[0],
+        message: error.message,
+      };
+    });
+
+    return NextResponse.json(errors, { status: 401 });
   }
 
   const { username, password } = result.data;
