@@ -2,29 +2,26 @@ import { NextRequest, NextResponse } from "next/server";
 import { loginFormSchema } from "@/utils/validations";
 import bcrypt from "bcrypt";
 import jsonwebtoken from "jsonwebtoken";
+import ErrorResponse from "@/utils/ErrorResponse";
+import HttpStatus from "@/enums/HttpStatus";
+import ValidationError from "@/utils/ValidationError";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const result = loginFormSchema.safeParse(body);
 
   if (!result.success) {
-    const errors = result.error.errors.map((error) => {
-      return {
-        field: error.path[0],
-        message: error.message,
-      };
-    });
-
-    return NextResponse.json(errors, { status: 401 });
+    return ValidationError.create(result.error);
   }
 
   const { username, password } = result.data;
+
   const user = await findOne({ username });
   const passwordsMatch = await bcrypt.compare(password, user.passwordHash);
   if (!user || !passwordsMatch) {
-    return NextResponse.json(
-      { error: "Incorrect username or password" },
-      { status: 401 }
+    return ErrorResponse.create(
+      "Incorrect username or password",
+      HttpStatus.BAD_REQUEST
     );
   }
 
