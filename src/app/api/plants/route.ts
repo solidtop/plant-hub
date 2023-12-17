@@ -18,7 +18,6 @@ export async function GET(req: NextRequest) {
   const apiUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}&page=${page}`;
   const res = await fetch(apiUrl);
   const payload: Payload = await res.json();
-  const plants: Plant[] = payload.data;
 
-  return NextResponse.json(plants);
+  return NextResponse.json(payload);
 }
