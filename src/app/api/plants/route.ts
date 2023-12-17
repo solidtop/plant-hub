@@ -12,7 +12,10 @@ type Payload = {
 };
 
 export async function GET(req: NextRequest) {
-  const apiUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}`;
+  const { searchParams } = new URL(req.url);
+  const page = searchParams.get("page");
+
+  const apiUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}&page=${page}`;
   const res = await fetch(apiUrl);
   const payload: Payload = await res.json();
   const plants: Plant[] = payload.data;
