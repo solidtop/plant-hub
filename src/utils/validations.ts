@@ -42,6 +42,6 @@ export const registerFormSchema = z
     lastName: z.string().default(""),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Password don't match",
+    message: "Passwords don't match",
     path: ["confirmPassword"],
   });
