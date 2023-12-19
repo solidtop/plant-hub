@@ -5,8 +5,12 @@ import jsonwebtoken from "jsonwebtoken";
 import ValidationError from "@/utils/ValidationError";
 import ErrorResponse from "@/utils/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
+import User from "@/models/User";
+import connectToDatabase from "@/utils/database";
 
 export async function POST(req: NextRequest) {
+  await connectToDatabase();
+
   const body = await req.json();
   const result = registerFormSchema.safeParse(body);
 
@@ -16,7 +20,7 @@ export async function POST(req: NextRequest) {
 
   const { username, password, firstName, lastName } = result.data;
 
-  const usernameExists = await exists({ username });
+  const usernameExists = await User.exists({ username });
   if (usernameExists) {
     return ErrorResponse.create(
       "Username is already taken",
@@ -25,9 +29,9 @@ export async function POST(req: NextRequest) {
   }
 
   const passwordHash = await bcrypt.hash(password, 5);
-  const user = new UserModel({
+  const user = new User({
     username,
-    passwordHash,
+    password: passwordHash,
     firstName,
     lastName,
   });
@@ -35,7 +39,7 @@ export async function POST(req: NextRequest) {
   await user.save();
 
   const key = process.env.JWT_KEY as string;
-  const jwt = jsonwebtoken.sign({ sub: user.toJSON()._id }, key);
+  const jwt = jsonwebtoken.sign({ userId: user.toJSON()._id }, key);
 
   const res = NextResponse.json({
     id: user._id,
@@ -47,28 +51,4 @@ export async function POST(req: NextRequest) {
   res.cookies.set("token", jwt);
 
   return res;
-}
-
-// Placeholder
-async function exists(data: { username: string }): Promise<boolean> {
-  return data.username === "solidtop" ? true : false;
-}
-
-class UserModel {
-  data: Object;
-  _id: string = "1";
-
-  constructor(data: Object) {
-    this.data = data;
-  }
-
-  async save() {}
-  toJSON() {
-    return {
-      _id: this._id,
-      username: "user",
-      firstName: "user",
-      lastName: "",
-    };
-  }
 }

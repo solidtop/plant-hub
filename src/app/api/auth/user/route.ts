@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import ErrorResponse from "@/utils/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
 import jsonwebtoken from "jsonwebtoken";
+import User from "@/models/User";
 
 type Payload = {
   userId: string;
@@ -17,7 +18,7 @@ export async function GET(req: NextRequest) {
     const key = process.env.JWT_KEY as string;
     const payload = jsonwebtoken.verify(jwt, key) as Payload;
     const userId = payload.userId;
-    const user = await findById(userId);
+    const user = await User.findById(userId);
     if (!user) {
       return ErrorResponse.create("user not found", HttpStatus.NOT_FOUND);
     }
@@ -35,14 +36,4 @@ export async function GET(req: NextRequest) {
 
 function unauthorized() {
   return new NextResponse(null, { status: HttpStatus.UNAUTHORIZED });
-}
-
-// Placeholder
-async function findById(id: String) {
-  return {
-    _id: "1",
-    username: "solidtop",
-    firstName: "Axel",
-    lastName: "Asp",
-  };
 }
