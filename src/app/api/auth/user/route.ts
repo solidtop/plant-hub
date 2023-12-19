@@ -3,12 +3,15 @@ import ErrorResponse from "@/utils/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
 import jsonwebtoken from "jsonwebtoken";
 import User from "@/models/User";
+import connectToDatabase from "@/utils/database";
 
 type Payload = {
   userId: string;
 };
 
 export async function GET(req: NextRequest) {
+  await connectToDatabase();
+
   const jwt = req.cookies.get("token")?.value;
   if (!jwt) {
     return unauthorized();

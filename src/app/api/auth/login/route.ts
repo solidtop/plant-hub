@@ -6,8 +6,11 @@ import ErrorResponse from "@/utils/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
 import ValidationError from "@/utils/ValidationError";
 import User from "@/models/User";
+import connectToDatabase from "@/utils/database";
 
 export async function POST(req: NextRequest) {
+  await connectToDatabase();
+
   const body = await req.json();
   const result = loginFormSchema.safeParse(body);
 
