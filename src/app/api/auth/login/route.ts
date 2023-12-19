@@ -5,8 +5,12 @@ import jsonwebtoken from "jsonwebtoken";
 import ErrorResponse from "@/utils/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
 import ValidationError from "@/utils/ValidationError";
+import User from "@/models/User";
+import connectToDatabase from "@/utils/database";
 
 export async function POST(req: NextRequest) {
+  await connectToDatabase();
+
   const body = await req.json();
   const result = loginFormSchema.safeParse(body);
 
@@ -16,8 +20,9 @@ export async function POST(req: NextRequest) {
 
   const { username, password } = result.data;
 
-  const user = await findOne({ username });
-  const passwordsMatch = await bcrypt.compare(password, user.passwordHash);
+  const user = await User.findOne({ username });
+  const passwordsMatch = await bcrypt.compare(password, user.password);
+
   if (!user || !passwordsMatch) {
     return ErrorResponse.create(
       "Incorrect username or password",
@@ -26,7 +31,7 @@ export async function POST(req: NextRequest) {
   }
 
   const key = process.env.JWT_KEY as string;
-  const jwt = jsonwebtoken.sign({ sub: user.toJSON()._id }, key);
+  const jwt = jsonwebtoken.sign({ userId: user.toJSON()._id }, key);
 
   const res = NextResponse.json({
     id: user._id,
@@ -38,28 +43,4 @@ export async function POST(req: NextRequest) {
   res.cookies.set("token", jwt);
 
   return res;
-}
-
-// Placeholder
-async function findOne(data: { username: string }): Promise<{
-  _id: string;
-  username: string;
-  firstName: string;
-  lastName: string;
-  passwordHash: string;
-  toJSON: () => { _id: string };
-}> {
-  const username = data.username;
-  const passwordHash = await bcrypt.hash("password", 5);
-
-  return {
-    _id: "1",
-    username,
-    firstName: "Axel",
-    lastName: "Asp",
-    passwordHash,
-    toJSON: () => {
-      return { _id: "1" };
-    },
-  };
 }
