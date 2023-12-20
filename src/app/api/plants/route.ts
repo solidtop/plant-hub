@@ -1,4 +1,4 @@
-import { Plant } from "@/types/Plant";
+import Plant from "@/types/Plant";
 import { NextRequest, NextResponse } from "next/server";
 
 type Payload = {
