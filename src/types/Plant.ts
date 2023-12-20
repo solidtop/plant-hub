@@ -1,6 +1,6 @@
-import { DefaultImage } from "./DefaultImage";
+import DefaultImage from "./DefaultImage";
 
-export type Plant = {
+type Plant = {
   id: number;
   commonName: string;
   scientificName: string[];
@@ -10,3 +10,5 @@ export type Plant = {
   sunlight: string[];
   defaulImage: DefaultImage;
 };
+
+export default Plant;
