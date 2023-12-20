@@ -1,4 +1,4 @@
-export type DefaultImage = {
+type DefaultImage = {
   imageId: number;
   licence: number;
   licenseName: string;
@@ -9,3 +9,5 @@ export type DefaultImage = {
   smallUrl: string;
   thumbnail: string;
 };
+
+export default DefaultImage;
