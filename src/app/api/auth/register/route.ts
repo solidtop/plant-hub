@@ -5,7 +5,7 @@ import jsonwebtoken from "jsonwebtoken";
 import ValidationError from "@/utils/ValidationError";
 import ErrorResponse from "@/utils/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
-import UserModel from "@/models/UserModel";
+import User from "@/models/User";
 import connectToDatabase from "@/utils/database";
 
 export async function POST(req: NextRequest) {
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 
   const { username, password, firstName, lastName } = result.data;
 
-  const usernameExists = await UserModel.exists({ username });
+  const usernameExists = await User.exists({ username });
   if (usernameExists) {
     return ErrorResponse.create(
       "Username is already taken",
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
   }
 
   const passwordHash = await bcrypt.hash(password, 5);
-  const user = new UserModel({
+  const user = new User({
     username,
     password: passwordHash,
     firstName,

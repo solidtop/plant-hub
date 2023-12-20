@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import ErrorResponse from "@/utils/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
 import jsonwebtoken from "jsonwebtoken";
-import UserModel from "@/models/UserModel";
+import User from "@/models/User";
 import connectToDatabase from "@/utils/database";
 
 type Payload = {
@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
     const key = process.env.JWT_KEY as string;
     const payload = jsonwebtoken.verify(jwt, key) as Payload;
     const userId = payload.userId;
-    const user = await UserModel.findById(userId);
+    const user = await User.findById(userId);
     if (!user) {
       return ErrorResponse.create("user not found", HttpStatus.NOT_FOUND);
     }

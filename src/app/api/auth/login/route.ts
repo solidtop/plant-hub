@@ -5,7 +5,7 @@ import jsonwebtoken from "jsonwebtoken";
 import ErrorResponse from "@/utils/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
 import ValidationError from "@/utils/ValidationError";
-import UserModel from "@/models/UserModel";
+import User from "@/models/User";
 import connectToDatabase from "@/utils/database";
 
 export async function POST(req: NextRequest) {
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 
   const { username, password } = result.data;
 
-  const user = await UserModel.findOne({ username });
+  const user = await User.findOne({ username });
   const passwordsMatch = await bcrypt.compare(password, user.password);
 
   if (!user || !passwordsMatch) {
