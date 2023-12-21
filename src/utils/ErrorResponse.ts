@@ -1,4 +1,5 @@
 import HttpStatus from "@/enums/HttpStatus";
+import ApiErrorResponse from "@/types/ApiErrorResponse";
 import { NextResponse } from "next/server";
 
 export default class ErrorResponse {
@@ -10,16 +11,17 @@ export default class ErrorResponse {
     this.status = status;
   }
 
-  static create(message: string, status: HttpStatus): NextResponse {
+  static create(message: string, status: HttpStatus) {
     const timestamp = new Date().toLocaleString();
 
-    return NextResponse.json(
-      {
+    const errorResponse: ApiErrorResponse = {
+      error: {
         message,
         status,
         timestamp,
       },
-      { status }
-    );
+    };
+
+    return NextResponse.json(errorResponse, { status });
   }
 }

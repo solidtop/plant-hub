@@ -7,6 +7,7 @@ import HttpStatus from "@/enums/HttpStatus";
 import ValidationError from "@/utils/ValidationError";
 import UserModel from "@/models/UserModel";
 import connectToDatabase from "@/utils/database";
+import UserDto from "@/types/UserDto";
 
 export async function POST(req: NextRequest) {
   await connectToDatabase();
@@ -21,26 +22,34 @@ export async function POST(req: NextRequest) {
   const { username, password } = result.data;
 
   const user = await UserModel.findOne({ username });
-  const passwordsMatch = await bcrypt.compare(password, user.password);
+  if (!user) {
+    return badRequest();
+  }
 
-  if (!user || !passwordsMatch) {
-    return ErrorResponse.create(
-      "Incorrect username or password",
-      HttpStatus.BAD_REQUEST
-    );
+  const passwordsMatch = await bcrypt.compare(password, user.password);
+  if (!passwordsMatch) {
+    return badRequest();
   }
 
   const key = process.env.JWT_KEY as string;
   const jwt = jsonwebtoken.sign({ userId: user.toJSON()._id }, key);
 
-  const res = NextResponse.json({
+  const userDto: UserDto = {
     id: user._id,
     username: user.username,
     firstName: user.firstName,
     lastName: user.lastName,
-  });
+  };
 
+  const res = NextResponse.json(userDto);
   res.cookies.set("token", jwt);
 
   return res;
+}
+
+function badRequest() {
+  return ErrorResponse.create(
+    "Incorrect username or password",
+    HttpStatus.BAD_REQUEST
+  );
 }
