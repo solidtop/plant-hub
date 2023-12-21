@@ -1,7 +1,7 @@
 import HttpStatus from "@/enums/HttpStatus";
 import ApiValidationError from "@/types/ApiValidationError";
 import { NextResponse } from "next/server";
-import { ZodError, ZodIssue } from "zod";
+import { ZodError } from "zod";
 
 class ValidationError {
   static create(error: ZodError) {
