@@ -4,6 +4,7 @@ import HttpStatus from "@/enums/HttpStatus";
 import jsonwebtoken from "jsonwebtoken";
 import UserModel from "@/models/UserModel";
 import connectToDatabase from "@/utils/database";
+import UserDto from "@/types/UserDto";
 
 type Payload = {
   userId: string;
@@ -26,12 +27,14 @@ export async function GET(req: NextRequest) {
       return ErrorResponse.create("user not found", HttpStatus.NOT_FOUND);
     }
 
-    return NextResponse.json({
+    const userDto: UserDto = {
       id: user._id,
       username: user.username,
       firstName: user.firstName,
       lastName: user.lastName,
-    });
+    };
+
+    return NextResponse.json(userDto);
   } catch (error) {
     return unauthorized();
   }
