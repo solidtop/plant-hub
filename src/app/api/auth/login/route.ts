@@ -2,21 +2,22 @@ import { NextRequest, NextResponse } from "next/server";
 import { loginFormSchema } from "@/utils/validations";
 import bcrypt from "bcrypt";
 import jsonwebtoken from "jsonwebtoken";
-import ErrorResponse from "@/utils/ErrorResponse";
+import ErrorResponse from "@/responses/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
-import ValidationError from "@/utils/ValidationError";
 import UserModel from "@/models/UserModel";
 import connectToDatabase from "@/utils/database";
 import UserDto from "@/types/UserDto";
+import ValidationErrorResponse from "@/responses/ValidationErrorResponse";
+import LoginRequest from "@/types/LoginRequest";
 
 export async function POST(req: NextRequest) {
   await connectToDatabase();
 
-  const body = await req.json();
-  const result = loginFormSchema.safeParse(body);
+  const loginRequest: LoginRequest = await req.json();
+  const result = loginFormSchema.safeParse(loginRequest);
 
   if (!result.success) {
-    return ValidationError.create(result.error);
+    return ValidationErrorResponse.create<LoginRequest>(result.error);
   }
 
   const { username, password } = result.data;

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import ErrorResponse from "@/utils/ErrorResponse";
+import ErrorResponse from "@/responses/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
 
 export function POST() {
