@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import ErrorResponse from "@/utils/ErrorResponse";
+import ErrorResponse from "@/responses/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
 import jsonwebtoken from "jsonwebtoken";
 import UserModel from "@/models/UserModel";
