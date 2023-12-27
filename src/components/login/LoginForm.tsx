@@ -7,8 +7,6 @@ import PrimaryButton from "../button/PrimaryButton";
 import useUser from "@/hooks/useUser";
 import { loginFormSchema } from "@/utils/validations";
 import ValidationError from "@/responses/ValidationError";
-import ApiError from "@/responses/ApiError";
-import { ZodFormattedError } from "zod";
 import LoginRequest from "@/types/LoginRequest";
 
 type LoginFormProps = {
@@ -21,7 +19,7 @@ const LoginForm: FC<LoginFormProps> = ({ onLoginComplete }) => {
   const [password, setPassword] = useState("");
   const [validationError, setValidationError] =
     useState<ValidationError<LoginRequest> | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -30,8 +28,8 @@ const LoginForm: FC<LoginFormProps> = ({ onLoginComplete }) => {
 
     const result = loginFormSchema.safeParse({ username, password });
     if (!result.success) {
-      const validationError = new ValidationError<LoginRequest>(result.error);
-      setValidationError(validationError);
+      const error = new ValidationError<LoginRequest>(result.error);
+      setValidationError(error);
       return;
     }
 
