@@ -5,7 +5,7 @@ type UsernameFieldProps = {
   label?: string;
   username: string;
   setUsername: Dispatch<SetStateAction<string>>;
-  errorMessage: string;
+  errorMessage?: string;
 };
 
 const UsernameField: FC<UsernameFieldProps> = ({

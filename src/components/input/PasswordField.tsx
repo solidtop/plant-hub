@@ -6,7 +6,7 @@ type PasswordInputProps = {
   id?: string;
   password: string;
   setPassword: Dispatch<SetStateAction<string>>;
-  errorMessage: string;
+  errorMessage?: string;
 };
 
 const PasswordField: FC<PasswordInputProps> = ({
