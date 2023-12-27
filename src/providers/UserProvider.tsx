@@ -22,7 +22,9 @@ type UserState = {
   register: (
     username: string,
     password: string,
-    confirmPassword: string
+    confirmPassword: string,
+    firstName: string,
+    lastName: string
   ) => Promise<RegisterPayload | null>;
 };
 
@@ -91,7 +93,9 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
   const register = async (
     username: string,
     password: string,
-    confirmPassword: string
+    confirmPassword: string,
+    firstName: string,
+    lastName: string
   ) => {
     const payload = await fetchData<RegisterPayload>(
       "api/auth/register",
@@ -100,6 +104,8 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
         username,
         password,
         confirmPassword,
+        firstName,
+        lastName,
       }
     );
 
