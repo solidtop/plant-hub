@@ -1,6 +1,6 @@
 "use client";
 
-import RegisterForm from "@/components/register/RegisterForm";
+import RegisterForm from "@/components/auth/RegisterForm";
 import { useRouter } from "next/navigation";
 
 export default function Content() {

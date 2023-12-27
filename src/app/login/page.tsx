@@ -1,7 +1,8 @@
+import { Metadata } from "next";
 import Content from "./content";
 
-export const metadata = {
-  title: "Login",
+export const metadata: Metadata = {
+  title: "Login | Plant Hub",
 };
 
 export default function Login() {
