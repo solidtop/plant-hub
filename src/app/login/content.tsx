@@ -10,6 +10,7 @@ export default function Content() {
   const router = useRouter();
 
   useEffect(() => {
+    // As we're already logged in there's no need to login again
     if (user) {
       router.push("/");
     }
