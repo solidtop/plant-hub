@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
 
   const jwt = req.cookies.get("token")?.value;
   if (!jwt) {
-    return unauthorized();
+    return new NextResponse(null, { status: HttpStatus.NOT_FOUND });
   }
 
   try {
@@ -36,10 +36,6 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(userDto);
   } catch (error) {
-    return unauthorized();
+    return new NextResponse(null, { status: HttpStatus.UNAUTHORIZED });
   }
-}
-
-function unauthorized() {
-  return new NextResponse(null, { status: HttpStatus.UNAUTHORIZED });
 }

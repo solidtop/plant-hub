@@ -13,8 +13,8 @@ type Payload = {
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const query = searchParams.get("query");
-  const page = searchParams.get("page");
+  const query = searchParams.get("query") || "";
+  const page = searchParams.get("page") || "1";
 
   const apiUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}&q=${query}&page=${page}`;
   const res = await fetch(apiUrl);
