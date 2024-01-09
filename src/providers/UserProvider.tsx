@@ -8,7 +8,6 @@ import LoginRequest from "@/types/LoginRequest";
 import RegisterRequest from "@/types/RegisterRequest";
 import fetchData from "@/utils/fetchData";
 import HttpMethod from "@/enums/HttpMethod";
-import { useRouter } from "next/navigation";
 
 type UserPayload = UserDto & ApiError;
 type LoginPayload = UserDto & ValidationError<LoginRequest> & ApiError;
@@ -47,16 +46,15 @@ type UserProviderProps = {
 const UserProvider: FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<UserDto | null>(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
     const getUser = async () => {
-      const payload = await fetchData<UserPayload>(
+      const payload = await fetchData<UserPayload | null>(
         "api/auth/user",
         HttpMethod.GET
       );
 
-      if (!payload?.error) {
+      if (payload && payload?.id) {
         setUser(payload);
       }
 
