@@ -17,7 +17,7 @@ const Searchbar: FC<SearchbarProps> = () => {
   };
 
   return (
-    <nav className="sticky p-4 rounded-md bg-accent-color2 bg-opacity-30">
+    <nav className="sticky p-4 rounded-md bg-accent-color bg-opacity-30">
       <form onSubmit={handleSubmit}>
         <div className="flex items-center">
           <Image
@@ -31,7 +31,7 @@ const Searchbar: FC<SearchbarProps> = () => {
             placeholder="Search for plants..."
             value={text}
             onChange={(ev) => setText(ev.target.value)}
-            className="w-full pl-16 p-4 rounded-full text-white bg-primary-color"
+            className="w-full pl-16 p-4 rounded-full bg-primary-color"
           />
         </div>
       </form>

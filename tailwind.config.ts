@@ -11,8 +11,7 @@ const config: Config = {
       colors: {
         "primary-color": "#1B3016",
         "secondary-color": "#519259",
-        "accent-color1": "white",
-        "accent-color2": "#A7B77B",
+        "accent-color": "#A7B77B",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

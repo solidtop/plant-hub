@@ -5,13 +5,18 @@ import { FC } from "react";
 type PrimaryLinkProps = {
   href: Url;
   children?: React.ReactNode;
+  className?: string;
 };
 
-const PrimaryLink: FC<PrimaryLinkProps> = ({ href, children }) => {
+const PrimaryLink: FC<PrimaryLinkProps> = ({
+  href,
+  children,
+  className = "",
+}) => {
   return (
     <Link
       href={href}
-      className="flex justify-center items-center w-28 rounded-md text-white bg-primary-color"
+      className={`flex justify-center items-center w-28 h-14 rounded-md bg-primary-color ${className}`}
     >
       {children}
     </Link>

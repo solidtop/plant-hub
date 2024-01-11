@@ -5,13 +5,18 @@ import { FC } from "react";
 type SecondaryLinkProps = {
   href: Url;
   children?: React.ReactNode;
+  className?: string;
 };
 
-const SecondaryLink: FC<SecondaryLinkProps> = ({ href, children }) => {
+const SecondaryLink: FC<SecondaryLinkProps> = ({
+  href,
+  children,
+  className = "",
+}) => {
   return (
     <Link
       href={href}
-      className="flex justify-center items-center w-28 rounded-md text-accent-color1 border-2 border-primary-color"
+      className={`flex justify-center items-center w-28 h-14 rounded-md border-2 border-primary-color ${className}`}
     >
       {children}
     </Link>
