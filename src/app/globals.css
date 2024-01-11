@@ -5,3 +5,8 @@
 body {
   background-color: #163020;
 }
+
+input:focus {
+  outline: none;
+  border: none;
+}
