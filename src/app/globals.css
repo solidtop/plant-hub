@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  color: white;
+}
+
+body {
+  background-color: #163020;
+}
+
+input:focus {
+  outline: none;
+  border: none;
+}
+
+h1 {
+  font-size: 1.8rem;
+}
