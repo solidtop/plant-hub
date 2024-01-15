@@ -8,7 +8,7 @@ type Plant = {
   cycle: string;
   watering: string;
   sunlight: string[];
-  defaulImage: DefaultImage;
+  defaultImage: DefaultImage | null;
 };
 
 export default Plant;

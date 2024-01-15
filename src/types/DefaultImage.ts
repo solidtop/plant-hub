@@ -1,6 +1,5 @@
 type DefaultImage = {
-  imageId: number;
-  licence: number;
+  license: number;
   licenseName: string;
   licenseUrl: string;
   originalUrl: string;

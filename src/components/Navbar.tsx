@@ -1,6 +1,6 @@
 import { FC } from "react";
-import PrimaryLink from "./PrimaryLink";
-import SecondaryLink from "./SecondaryLink";
+import PrimaryLink from "./link/PrimaryLink";
+import SecondaryLink from "./link/SecondaryLink";
 
 const Navbar: FC = () => {
   return (
