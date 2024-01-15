@@ -1,14 +1,24 @@
-import DefaultImage from "./DefaultImage";
+export type PlantSummary = {
+  id: number;
+  commonName: string;
+  watering: string;
+  sunlight: string[];
+  imageUrl: string | null;
+};
 
-type Plant = {
+export type PlantDetails = {
   id: number;
   commonName: string;
   scientificName: string[];
-  otherName: string[];
   cycle: string;
-  watering: string;
   sunlight: string[];
-  defaultImage: DefaultImage | null;
+  careLevel: string;
+  hardiness: Hardiness;
+  growthRate: string;
+  imageUrl: string | null;
 };
 
-export default Plant;
+type Hardiness = {
+  min: number;
+  max: number;
+};
