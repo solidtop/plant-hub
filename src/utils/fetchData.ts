@@ -2,12 +2,12 @@ import HttpMethod from "@/enums/HttpMethod";
 
 async function fetchData<T>(
   url: string,
-  method: HttpMethod,
+  method?: HttpMethod,
   data?: Object
 ): Promise<T | null> {
   try {
     const init: RequestInit = {
-      method,
+      method: method ? method : "GET",
       headers: {
         "Content-Type": "application/json",
       },
