@@ -5,15 +5,13 @@ import { FC, FormEvent, useState } from "react";
 import SearchIcon from "/public/icons/magnifying-glass-solid.svg";
 import { useRouter } from "next/navigation";
 
-type SearchbarProps = {};
-
-const Searchbar: FC<SearchbarProps> = () => {
+const Searchbar: FC = () => {
   const router = useRouter();
   const [text, setText] = useState("");
 
   const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    router.push(`/search?query=${text}`);
+    router.push(`/plants/search?query=${text}`);
   };
 
   return (
