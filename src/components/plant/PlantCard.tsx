@@ -1,6 +1,8 @@
+"use client";
+
 import { PlantSummary } from "@/types/plant";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useState } from "react";
 import InfoIcon from "/public/icons/info-solid.svg";
 import SunIcon from "/public/icons/sun-icon.png";
 import WaterIcon from "/public/icons/water-icon.png";
@@ -8,20 +10,22 @@ import CareIcon from "/public/icons/care-icon.png";
 import PlantStat from "./PlantStat";
 import InCollectionLabel from "../InCollectionLabel";
 import Link from "next/link";
+import TogglePlantButton from "../button/TogglePlantButton";
+import useUser from "@/hooks/useUser";
 
 type PlantCardProps = {
   id: number;
   plant: PlantSummary;
-  inCollection: boolean;
-  children: React.ReactNode;
 };
 
-const PlantCard: FC<PlantCardProps> = ({
-  id,
-  plant,
-  inCollection,
-  children,
-}) => {
+const PlantCard: FC<PlantCardProps> = ({ id, plant }) => {
+  const { user } = useUser();
+  const [inCollection, setInCollection] = useState(false);
+
+  const handleToggle = () => {
+    setInCollection((inCollection) => !inCollection);
+  };
+
   return (
     <li
       id={id.toString()}
@@ -70,7 +74,9 @@ const PlantCard: FC<PlantCardProps> = ({
         <PlantStat key={3} icon={CareIcon} label="Not available" size={20} />
       </ul>
 
-      {children}
+      {user && (
+        <TogglePlantButton active={inCollection} onClick={handleToggle} />
+      )}
     </li>
   );
 };

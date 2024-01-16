@@ -20,7 +20,7 @@ const PlantStat: FC<PlantStatProps> = ({ icon, labels, label, size = 25 }) => {
 
         {labels &&
           labels.map((label, index) => (
-            <p>
+            <p key={index}>
               {index > 0 && ", "}
               {label}
             </p>

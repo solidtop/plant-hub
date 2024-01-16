@@ -1,42 +1,23 @@
-"use client";
-
-import useUser from "@/hooks/useUser";
-import { PlantSummary } from "@/types/plant";
-import fetchData from "@/utils/fetchData";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import PlantCard from "./PlantCard";
-import TogglePlantButton from "../button/TogglePlantButton";
+import { getPlants } from "@/utils/api";
+import NoResults from "../NoResults";
 
-const PlantList: FC = () => {
-  const { user } = useUser();
-  const [plants, setPlants] = useState<PlantSummary[]>([]);
+type PlantListProps = {
+  query?: string;
+};
 
-  useEffect(() => {
-    const getPlants = async () => {
-      const payload = await fetchData<PlantSummary[]>("/api/plants");
-      if (payload) {
-        setPlants(payload);
-      }
-    };
+const PlantList: FC<PlantListProps> = async ({ query = "" }) => {
+  const plants = await getPlants(query);
 
-    getPlants();
-  }, []);
-
-  const handleClick = () => {
-    console.log("click"); // TODO: Send request to /api/my-plants
-  };
+  if (plants.length == 0) {
+    return <NoResults />;
+  }
 
   return (
     <ul>
       {plants.map((plant) => (
-        <PlantCard
-          key={plant.id}
-          id={plant.id}
-          plant={plant}
-          inCollection={user ? true : false}
-        >
-          {user && <TogglePlantButton active={true} onClick={handleClick} />}
-        </PlantCard>
+        <PlantCard key={plant.id} id={plant.id} plant={plant} />
       ))}
     </ul>
   );
