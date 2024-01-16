@@ -10,8 +10,10 @@ export type PlantDetails = {
   id: number;
   commonName: string;
   scientificName: string[];
+  description: string;
   cycle: string;
   sunlight: string[];
+  watering: string;
   careLevel: string;
   hardiness: Hardiness;
   growthRate: string;
