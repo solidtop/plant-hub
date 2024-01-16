@@ -1,4 +1,4 @@
-import Plant from "@/types/Plant";
+import { PlantSummary } from "@/types/plant";
 import Image from "next/image";
 import { FC } from "react";
 import InfoIcon from "/public/icons/info-solid.svg";
@@ -11,7 +11,7 @@ import Link from "next/link";
 
 type PlantCardProps = {
   id: number;
-  plant: Plant;
+  plant: PlantSummary;
   inCollection: boolean;
   children: React.ReactNode;
 };
@@ -30,9 +30,9 @@ const PlantCard: FC<PlantCardProps> = ({
       <Link href={`/plants/${id}`} className="absolute inset-0 z-10" />
 
       <div className="relative">
-        {plant.defaultImage ? (
+        {plant.imageUrl ? (
           <Image
-            src={plant.defaultImage.originalUrl}
+            src={plant.imageUrl}
             width={300}
             height={300}
             alt="Plant image"
