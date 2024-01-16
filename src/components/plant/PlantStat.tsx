@@ -16,6 +16,8 @@ const PlantStat: FC<PlantStatProps> = ({ icon, labels, label, size = 25 }) => {
       </div>
 
       <div className="flex px-2">
+        {label && <p className="mr-2">{label}</p>}
+
         {labels &&
           labels.map((label, index) => (
             <p>
@@ -23,8 +25,6 @@ const PlantStat: FC<PlantStatProps> = ({ icon, labels, label, size = 25 }) => {
               {label}
             </p>
           ))}
-
-        {label && <p>{label}</p>}
       </div>
     </li>
   );

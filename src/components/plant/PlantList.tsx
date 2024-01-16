@@ -1,7 +1,7 @@
 "use client";
 
 import useUser from "@/hooks/useUser";
-import Plant from "@/types/Plant";
+import { PlantSummary } from "@/types/plant";
 import fetchData from "@/utils/fetchData";
 import { FC, useEffect, useState } from "react";
 import PlantCard from "./PlantCard";
@@ -9,11 +9,11 @@ import TogglePlantButton from "../button/TogglePlantButton";
 
 const PlantList: FC = () => {
   const { user } = useUser();
-  const [plants, setPlants] = useState<Plant[]>([]);
+  const [plants, setPlants] = useState<PlantSummary[]>([]);
 
   useEffect(() => {
     const getPlants = async () => {
-      const payload = await fetchData<Plant[]>("/api/plants");
+      const payload = await fetchData<PlantSummary[]>("/api/plants");
       if (payload) {
         setPlants(payload);
       }
