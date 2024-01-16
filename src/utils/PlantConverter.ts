@@ -16,9 +16,11 @@ class PlantConverter {
     return {
       id: plant.id,
       commonName: plant.common_name,
+      description: plant.description,
       scientificName: plant.scientific_name,
       cycle: plant.cycle,
       sunlight: plant.sunlight,
+      watering: plant.watering,
       careLevel: plant.care_level,
       hardiness: plant.hardiness,
       growthRate: plant.growth_rate,

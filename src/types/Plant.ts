@@ -9,9 +9,11 @@ export type PlantSummary = {
 export type PlantDetails = {
   id: number;
   commonName: string;
+  description: string;
   scientificName: string[];
   cycle: string;
   sunlight: string[];
+  watering: string;
   careLevel: string;
   hardiness: Hardiness;
   growthRate: string;
