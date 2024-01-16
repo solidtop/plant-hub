@@ -1,7 +1,6 @@
 import { ApiPlantDetails } from "@/types/api";
 import fetchData from "./fetchData";
 import PlantConverter from "./PlantConverter";
-import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 import UserModel from "@/models/UserModel";
 import jsonwebtoken from "jsonwebtoken";
 import User from "@/types/User";
