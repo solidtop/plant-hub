@@ -9,6 +9,7 @@ import UserModel from "@/models/UserModel";
 import connectToDatabase from "@/utils/database";
 import UserDto from "@/types/UserDto";
 import RegisterRequest from "@/types/RegisterRequest";
+import User from "@/types/User";
 
 export async function POST(req: NextRequest) {
   await connectToDatabase();
@@ -36,7 +37,7 @@ export async function POST(req: NextRequest) {
     password: passwordHash,
     firstName,
     lastName,
-  });
+  }) as User;
 
   await user.save();
 
