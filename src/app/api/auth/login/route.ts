@@ -9,6 +9,7 @@ import connectToDatabase from "@/utils/database";
 import UserDto from "@/types/UserDto";
 import ValidationErrorResponse from "@/responses/ValidationErrorResponse";
 import LoginRequest from "@/types/LoginRequest";
+import User from "@/types/User";
 
 export async function POST(req: NextRequest) {
   await connectToDatabase();
@@ -22,7 +23,7 @@ export async function POST(req: NextRequest) {
 
   const { username, password } = result.data;
 
-  const user = await UserModel.findOne({ username });
+  const user = (await UserModel.findOne({ username })) as User;
   if (!user) {
     return badRequest();
   }
