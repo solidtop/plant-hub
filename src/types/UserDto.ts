@@ -3,6 +3,7 @@ type UserDTO = {
   username: string;
   firstName?: string;
   lastName?: string;
+  plantIds: number[];
 };
 
 export default UserDTO;

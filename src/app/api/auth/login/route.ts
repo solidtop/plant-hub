@@ -6,7 +6,6 @@ import ErrorResponse from "@/responses/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
 import UserModel from "@/models/UserModel";
 import connectToDatabase from "@/utils/database";
-import UserDTO from "@/types/UserDTO";
 import ValidationErrorResponse from "@/responses/ValidationErrorResponse";
 import LoginRequest from "@/types/LoginRequest";
 import User from "@/types/User";

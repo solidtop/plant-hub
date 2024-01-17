@@ -8,6 +8,7 @@ class UserConverter {
       username: user.username,
       firstName: user.firstName,
       lastName: user.lastName,
+      plantIds: user.plantIds,
     };
   }
 }

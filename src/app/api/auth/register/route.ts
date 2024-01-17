@@ -7,7 +7,6 @@ import ErrorResponse from "@/responses/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
 import UserModel from "@/models/UserModel";
 import connectToDatabase from "@/utils/database";
-import UserDTO from "@/types/UserDTO";
 import RegisterRequest from "@/types/RegisterRequest";
 import User from "@/types/User";
 import UserConverter from "@/utils/UserConverter";
