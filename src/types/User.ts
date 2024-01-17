@@ -4,6 +4,7 @@ type User = {
   password: string;
   firstName?: string;
   lastName?: string;
+  plantIds: number[];
   save: () => Promise<void>;
   toJSON: () => { _id: string };
 };
