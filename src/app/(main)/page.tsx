@@ -6,7 +6,8 @@ import { getUser } from "@/utils/api";
 import { cookies } from "next/headers";
 
 export default async function Home() {
-  const user = await getUser(cookies().get("token")?.value);
+  const jwt = cookies().get("token")?.value;
+  const user = await getUser(jwt);
 
   return (
     <main>
