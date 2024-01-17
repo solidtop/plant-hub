@@ -36,5 +36,5 @@ export async function POST(req: NextRequest) {
   user.plantIds.push(body.plantId);
   await user.save();
 
-  return new NextResponse();
+  return NextResponse.json(null);
 }

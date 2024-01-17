@@ -9,7 +9,6 @@ export type PlantSummary = {
 export type PlantDetails = {
   id: number;
   commonName: string;
-  description: string;
   scientificName: string[];
   description: string;
   cycle: string;

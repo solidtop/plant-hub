@@ -4,16 +4,18 @@ import Searchbar from "@/components/input/Searchbar";
 import Image from "next/image";
 import { getUser } from "@/utils/api";
 import { cookies } from "next/headers";
+import UserConverter from "@/utils/UserConverter";
 
 export default async function Home() {
   const jwt = cookies().get("token")?.value;
   const user = await getUser(jwt);
+  const userDTO = user ? UserConverter.convertToDTO(user) : null;
 
   return (
     <main>
       <Searchbar />
 
-      {!user && (
+      {!userDTO && (
         <div className="relative">
           <Image
             src="/images/hero-placeholder.png"
@@ -39,7 +41,7 @@ export default async function Home() {
       <section className="p-4">
         <h2>Browse plants</h2>
 
-        <PlantList />
+        <PlantList user={userDTO} />
       </section>
     </main>
   );

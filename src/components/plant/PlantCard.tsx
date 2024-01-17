@@ -11,20 +11,46 @@ import PlantStat from "./PlantStat";
 import InCollectionLabel from "../InCollectionLabel";
 import Link from "next/link";
 import TogglePlantButton from "../button/TogglePlantButton";
-import useUser from "@/hooks/useUser";
 import ImageNotFound from "/public/images/imagenotfound.png";
+import fetchData from "@/utils/fetchData";
+import HttpMethod from "@/enums/HttpMethod";
+import ApiError from "@/responses/ApiError";
 
 type PlantCardProps = {
   id: number;
   plant: PlantSummary;
+  loggedIn: boolean;
+  initInCollection: boolean;
 };
 
-const PlantCard: FC<PlantCardProps> = ({ id, plant }) => {
-  const { user } = useUser();
-  const [inCollection, setInCollection] = useState(false);
+const PlantCard: FC<PlantCardProps> = ({
+  id,
+  plant,
+  loggedIn,
+  initInCollection,
+}) => {
+  const [inCollection, setInCollection] = useState(initInCollection);
 
-  const handleToggle = () => {
+  const handleToggle = async () => {
     setInCollection((inCollection) => !inCollection);
+
+    let payload;
+
+    if (inCollection) {
+      payload = await fetchData<ApiError>(
+        `/api/my-plants/${id}`,
+        HttpMethod.DELETE
+      );
+    } else {
+      payload = await fetchData<ApiError>("/api/my-plants", HttpMethod.POST, {
+        plantId: id,
+      });
+    }
+
+    if (payload && payload?.error) {
+      // Reset to previous state when there is an error
+      setInCollection((inCollection) => !inCollection);
+    }
   };
 
   return (
@@ -75,7 +101,7 @@ const PlantCard: FC<PlantCardProps> = ({ id, plant }) => {
         <PlantStat key={3} icon={CareIcon} label="Not available" size={20} />
       </ul>
 
-      {user && (
+      {loggedIn && (
         <TogglePlantButton active={inCollection} onClick={handleToggle} />
       )}
     </li>
