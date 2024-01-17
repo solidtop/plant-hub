@@ -20,10 +20,16 @@ type PlantCardProps = {
   id: number;
   plant: PlantSummary;
   loggedIn: boolean;
+  initInCollection: boolean;
 };
 
-const PlantCard: FC<PlantCardProps> = ({ id, plant, loggedIn }) => {
-  const [inCollection, setInCollection] = useState(false);
+const PlantCard: FC<PlantCardProps> = ({
+  id,
+  plant,
+  loggedIn,
+  initInCollection,
+}) => {
+  const [inCollection, setInCollection] = useState(initInCollection);
 
   const handleToggle = async () => {
     setInCollection((inCollection) => !inCollection);

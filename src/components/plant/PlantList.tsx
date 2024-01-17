@@ -24,6 +24,7 @@ const PlantList: FC<PlantListProps> = async ({ user, query = "" }) => {
           id={plant.id}
           plant={plant}
           loggedIn={user ? true : false}
+          initInCollection={user?.plantIds.includes(plant.id) || false}
         />
       ))}
     </ul>
