@@ -43,5 +43,5 @@ export async function DELETE(req: NextRequest, { params }: RouteProps) {
   user.plantIds.splice(plantIndex, 1);
   await user.save();
 
-  return new NextResponse();
+  return NextResponse.json(null);
 }
