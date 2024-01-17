@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Signup | Plant Hub",
 };
 
-export default async function Register() {
+export default async function Signup() {
   const jwt = cookies().get("token")?.value;
   const user = await getUser(jwt);
 
