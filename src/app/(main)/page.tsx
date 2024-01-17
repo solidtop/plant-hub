@@ -23,7 +23,7 @@ export default function Home() {
             Sign up to keep track of your plants
           </p>
 
-          <PrimaryLink href="/register" className="ml-auto">
+          <PrimaryLink href="/signup" className="ml-auto">
             Sign up
           </PrimaryLink>
         </section>

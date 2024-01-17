@@ -5,7 +5,7 @@ type ReactElementProps = {
 };
 
 type DropdownProps = {
-  children: ReactElement<ReactElementProps>;
+  children: ReactElement<ReactElementProps>[];
 };
 
 const Dropdown: FC<DropdownProps> = ({ children }) => {

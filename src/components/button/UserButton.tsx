@@ -5,10 +5,14 @@ import UserIcon from "/public/icons/user-solid.svg";
 import Image from "next/image";
 import Dropdown from "../Dropdown";
 import LogoutIcon from "/public/icons/right-from-bracket-solid.svg";
-import fetchData from "@/utils/fetchData";
 import useUser from "@/hooks/useUser";
+import UserDto from "@/types/UserDTO";
 
-const UserButton: FC = () => {
+type UserButtonProps = {
+  user: UserDto;
+};
+
+const UserButton: FC<UserButtonProps> = ({ user }) => {
   const { logout } = useUser();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -42,6 +46,10 @@ const UserButton: FC = () => {
 
       {open && (
         <Dropdown>
+          <span className="flex flex-col">
+            {user.firstName ? user.firstName : user.username}
+          </span>
+
           <button
             onClick={async () => {
               await logout();
