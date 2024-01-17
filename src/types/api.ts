@@ -1,5 +1,5 @@
 export type ApiData = {
-  data: ApiPlant[];
+  data: ApiPlantSummary[];
   to: number;
   per_page: number;
   current_page: number;
@@ -8,7 +8,7 @@ export type ApiData = {
   total: number;
 };
 
-type ApiPlant = {
+type ApiPlantSummary = {
   id: number;
   common_name: string;
   scientific_name: string[];

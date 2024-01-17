@@ -1,3 +1,5 @@
+"use client";
+
 import { FC, FormEvent, useState } from "react";
 import UsernameField from "../input/UsernameField";
 import ValidationError from "@/responses/ValidationError";
@@ -8,11 +10,7 @@ import InputField from "../input/InputField";
 import { registerFormSchema } from "@/utils/validations";
 import PrimaryButton from "../button/PrimaryButton";
 
-type RegisterFormProps = {
-  onRegisterComplete: () => void;
-};
-
-const RegisterForm: FC<RegisterFormProps> = ({ onRegisterComplete }) => {
+const RegisterForm: FC = () => {
   const { register } = useUser();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -35,6 +33,7 @@ const RegisterForm: FC<RegisterFormProps> = ({ onRegisterComplete }) => {
       firstName,
       lastName,
     });
+
     if (!result.success) {
       const error = new ValidationError<RegisterRequest>(result.error);
       setValidationError(error);
@@ -48,6 +47,7 @@ const RegisterForm: FC<RegisterFormProps> = ({ onRegisterComplete }) => {
       firstName,
       lastName
     );
+
     if (!payload) {
       return;
     }
@@ -60,7 +60,7 @@ const RegisterForm: FC<RegisterFormProps> = ({ onRegisterComplete }) => {
       return;
     }
 
-    onRegisterComplete();
+    window.location.replace("/");
   };
 
   return (

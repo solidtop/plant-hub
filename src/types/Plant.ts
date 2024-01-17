@@ -11,6 +11,7 @@ export type PlantDetails = {
   commonName: string;
   description: string;
   scientificName: string[];
+  description: string;
   cycle: string;
   sunlight: string[];
   watering: string;

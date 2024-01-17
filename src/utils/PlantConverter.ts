@@ -18,6 +18,7 @@ class PlantConverter {
       commonName: plant.common_name,
       description: plant.description,
       scientificName: plant.scientific_name,
+      description: plant.description,
       cycle: plant.cycle,
       sunlight: plant.sunlight,
       watering: plant.watering,

@@ -9,11 +9,7 @@ import { loginFormSchema } from "@/utils/validations";
 import ValidationError from "@/responses/ValidationError";
 import LoginRequest from "@/types/LoginRequest";
 
-type LoginFormProps = {
-  onLoginComplete: () => void;
-};
-
-const LoginForm: FC<LoginFormProps> = ({ onLoginComplete }) => {
+const LoginForm: FC = () => {
   const { login } = useUser();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -27,6 +23,7 @@ const LoginForm: FC<LoginFormProps> = ({ onLoginComplete }) => {
     setErrorMessage("");
 
     const result = loginFormSchema.safeParse({ username, password });
+
     if (!result.success) {
       const error = new ValidationError<LoginRequest>(result.error);
       setValidationError(error);
@@ -34,6 +31,7 @@ const LoginForm: FC<LoginFormProps> = ({ onLoginComplete }) => {
     }
 
     const payload = await login(username, password);
+
     if (!payload) {
       return;
     }
@@ -46,7 +44,7 @@ const LoginForm: FC<LoginFormProps> = ({ onLoginComplete }) => {
       return;
     }
 
-    onLoginComplete();
+    window.location.replace("/");
   };
 
   return (
