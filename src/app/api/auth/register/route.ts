@@ -7,9 +7,10 @@ import ErrorResponse from "@/responses/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
 import UserModel from "@/models/UserModel";
 import connectToDatabase from "@/utils/database";
-import UserDto from "@/types/UserDto";
+import UserDTO from "@/types/UserDTO";
 import RegisterRequest from "@/types/RegisterRequest";
 import User from "@/types/User";
+import UserConverter from "@/utils/UserConverter";
 
 export async function POST(req: NextRequest) {
   await connectToDatabase();
@@ -44,14 +45,8 @@ export async function POST(req: NextRequest) {
   const key = process.env.JWT_KEY as string;
   const jwt = jsonwebtoken.sign({ userId: user.toJSON()._id }, key);
 
-  const userDto: UserDto = {
-    id: user._id,
-    username,
-    firstName,
-    lastName,
-  };
-
-  const res = NextResponse.json(userDto);
+  const userDTO = UserConverter.convertToDTO(user);
+  const res = NextResponse.json(userDTO);
   res.cookies.set("token", jwt);
 
   return res;

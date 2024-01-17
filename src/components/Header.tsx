@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, Suspense } from "react";
 import Image from "next/image";
 import Navbar from "./Navbar";
 import Link from "next/link";
@@ -9,7 +9,10 @@ const Header: FC = () => {
       <Link href="/">
         <Image src="/images/logo.png" width={50} height={50} alt="Logo" />
       </Link>
-      <Navbar />
+
+      <Suspense fallback={<p>Loading...</p>}>
+        <Navbar />
+      </Suspense>
     </header>
   );
 };

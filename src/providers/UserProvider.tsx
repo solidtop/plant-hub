@@ -1,6 +1,6 @@
 "use client";
 
-import UserDto from "@/types/UserDto";
+import UserDto from "@/types/UserDTO";
 import ApiError from "@/responses/ApiError";
 import ValidationError from "@/responses/ValidationError";
 import { FC, ReactNode, createContext, useEffect, useState } from "react";

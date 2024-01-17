@@ -12,6 +12,7 @@ import InCollectionLabel from "../InCollectionLabel";
 import Link from "next/link";
 import TogglePlantButton from "../button/TogglePlantButton";
 import useUser from "@/hooks/useUser";
+import ImageNotFound from "/public/images/imagenotfound.png";
 
 type PlantCardProps = {
   id: number;
@@ -44,7 +45,7 @@ const PlantCard: FC<PlantCardProps> = ({ id, plant }) => {
           />
         ) : (
           <Image
-            src="/public/images/imagenotfound.png"
+            src={ImageNotFound}
             width={300}
             height={300}
             alt="Image not found"
