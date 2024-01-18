@@ -1,7 +1,15 @@
 import { FC } from "react";
 
-const NoResults: FC = () => {
-  return <h2 className="my-4 text-center">No results found</h2>;
+type NoResultsProps = {
+  text: string;
+};
+
+const NoResults: FC<NoResultsProps> = ({ text }) => {
+  return (
+    <div className="my-4 mx-auto text-center">
+      <h2>{text}</h2>
+    </div>
+  );
 };
 
 export default NoResults;
