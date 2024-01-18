@@ -1,10 +1,8 @@
+import NoResults from "@/components/NoResults";
 import Searchbar from "@/components/input/Searchbar";
 import PlantList from "@/components/plant/PlantList";
-import UserConverter from "@/utils/UserConverter";
-import { getUser } from "@/utils/api";
+import { getPlants } from "@/utils/api";
 import { Metadata } from "next";
-import { cookies } from "next/headers";
-import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Search | Plant Hub",
@@ -17,11 +15,12 @@ type SearchProps = {
 };
 
 export default async function Search({ searchParams }: SearchProps) {
-  const jwt = cookies().get("token")?.value;
-  const user = await getUser(jwt);
-  const userDTO = user ? UserConverter.convertToDTO(user) : null;
-
   const query = searchParams.query || "";
+  const plants = await getPlants(query);
+
+  if (plants.length === 0) {
+    return <NoResults text={`No results for "${query}"`} />;
+  }
 
   return (
     <main>
@@ -30,9 +29,7 @@ export default async function Search({ searchParams }: SearchProps) {
       <section className="p-4">
         <h1>{`Results for "${query}"`}</h1>
 
-        <Suspense key={query} fallback={<p>Loading plants...</p>}>
-          <PlantList user={userDTO} query={query} />
-        </Suspense>
+        <PlantList plants={plants} />
       </section>
     </main>
   );
