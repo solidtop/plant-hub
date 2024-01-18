@@ -1,8 +1,6 @@
-"use client";
-
 import { PlantSummary } from "@/types/plant";
 import Image from "next/image";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import InfoIcon from "/public/icons/info-solid.svg";
 import SunIcon from "/public/icons/sun-icon.png";
 import WaterIcon from "/public/icons/water-icon.png";
@@ -10,48 +8,32 @@ import CareIcon from "/public/icons/care-icon.png";
 import PlantStat from "./PlantStat";
 import InCollectionLabel from "../InCollectionLabel";
 import Link from "next/link";
-import TogglePlantButton from "../button/TogglePlantButton";
+import TogglePlantButton from "./PlantToggle";
 import ImageNotFound from "/public/images/imagenotfound.png";
-import fetchData from "@/utils/fetchData";
-import HttpMethod from "@/enums/HttpMethod";
-import ApiError from "@/responses/ApiError";
+
+type CardState = {
+  loggedIn: boolean;
+  inCollection: boolean;
+};
 
 type PlantCardProps = {
   id: number;
   plant: PlantSummary;
-  loggedIn: boolean;
-  initInCollection: boolean;
+  state: CardState;
+  onToggle?: () => void;
 };
 
 const PlantCard: FC<PlantCardProps> = ({
   id,
   plant,
-  loggedIn,
-  initInCollection,
+  state,
+  onToggle = () => {},
 }) => {
-  const [inCollection, setInCollection] = useState(initInCollection);
+  const [inCollection, setInCollection] = useState(state.inCollection);
 
-  const handleToggle = async () => {
-    setInCollection((inCollection) => !inCollection);
-
-    let payload;
-
-    if (inCollection) {
-      payload = await fetchData<ApiError>(
-        `/api/my-plants/${id}`,
-        HttpMethod.DELETE
-      );
-    } else {
-      payload = await fetchData<ApiError>("/api/my-plants", HttpMethod.POST, {
-        plantId: id,
-      });
-    }
-
-    if (payload && payload?.error) {
-      // Reset to previous state when there is an error
-      setInCollection((inCollection) => !inCollection);
-    }
-  };
+  useEffect(() => {
+    setInCollection(state.inCollection);
+  }, [state.inCollection]);
 
   return (
     <li
@@ -101,8 +83,15 @@ const PlantCard: FC<PlantCardProps> = ({
         <PlantStat key={3} icon={CareIcon} label="Not available" size={20} />
       </ul>
 
-      {loggedIn && (
-        <TogglePlantButton active={inCollection} onClick={handleToggle} />
+      {state.loggedIn && (
+        <TogglePlantButton
+          plantId={id}
+          inCollection={state.inCollection}
+          onToggle={(active: boolean) => {
+            setInCollection(active);
+            onToggle();
+          }}
+        />
       )}
     </li>
   );
