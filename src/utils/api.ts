@@ -25,8 +25,16 @@ export async function getPlantById(id: number) {
   return payload ? PlantConverter.convertToPlant(payload) : null;
 }
 
-export async function getPlantsByIds(ids: number[]) {
-  const promises = ids.map(async (id) => {
+export async function getPlantsByIds(
+  ids: number[],
+  page: number = 1,
+  pageSize: number = 10
+) {
+  const start = (page - 1) * pageSize;
+  const end = start + pageSize;
+  const batchIds = ids.slice(start, end);
+
+  const promises = batchIds.map(async (id) => {
     const plant = await fetchData<ApiPlantDetails>(
       `https://perenual.com/api/species/details/${id}?key=${process.env.API_KEY}`
     );
