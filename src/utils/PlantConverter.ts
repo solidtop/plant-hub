@@ -16,7 +16,6 @@ class PlantConverter {
     return {
       id: plant.id,
       commonName: plant.common_name,
-      description: plant.description,
       scientificName: plant.scientific_name,
       description: plant.description,
       cycle: plant.cycle,
@@ -25,6 +24,16 @@ class PlantConverter {
       careLevel: plant.care_level,
       hardiness: plant.hardiness,
       growthRate: plant.growth_rate,
+      imageUrl: plant.default_image ? plant.default_image.original_url : null,
+    };
+  }
+
+  static convertDetailsToSummary(plant: ApiPlantDetails): PlantSummary {
+    return {
+      id: plant.id,
+      commonName: plant.common_name,
+      watering: plant.watering,
+      sunlight: plant.sunlight,
       imageUrl: plant.default_image ? plant.default_image.original_url : null,
     };
   }
