@@ -11,12 +11,14 @@ type PlantToggleProps = {
   plantId: number;
   inCollection: boolean;
   onToggle: (active: boolean) => void;
+  className?: string;
 };
 
 const PlantToggle: FC<PlantToggleProps> = ({
   plantId,
   inCollection,
   onToggle,
+  className = "",
 }) => {
   const [active, setActive] = useState(inCollection);
 
@@ -51,7 +53,7 @@ const PlantToggle: FC<PlantToggleProps> = ({
   return (
     <PrimaryButton
       onClick={handleToggle}
-      className={`z-20 gap-2 self-end ${active ? "bg-opacity-100" : ""}`}
+      className={`z-20 gap-2 ${active ? "bg-opacity-100" : ""} ${className}`}
     >
       {active ? (
         <>

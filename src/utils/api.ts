@@ -56,6 +56,12 @@ export async function getMyPlantIds() {
   return user ? user.plantIds : [];
 }
 
+export async function isInCollection(plantId: number) {
+  const jwt = cookies().get("token")?.value;
+  const user = await getUser(jwt);
+  return user ? user.plantIds.includes(plantId) : false;
+}
+
 type TokenPayload = {
   userId: string;
 };
