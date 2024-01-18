@@ -1,3 +1,5 @@
+"use client";
+
 import { PlantSummary } from "@/types/plant";
 import Image from "next/image";
 import { FC, useEffect, useState } from "react";
@@ -8,7 +10,7 @@ import CareIcon from "/public/icons/care-icon.png";
 import PlantStat from "./PlantStat";
 import InCollectionLabel from "../InCollectionLabel";
 import Link from "next/link";
-import TogglePlantButton from "./PlantToggle";
+import PlantToggle from "./PlantToggle";
 import ImageNotFound from "/public/images/imagenotfound.png";
 
 type CardState = {
@@ -84,13 +86,14 @@ const PlantCard: FC<PlantCardProps> = ({
       </ul>
 
       {state.loggedIn && (
-        <TogglePlantButton
+        <PlantToggle
           plantId={id}
           inCollection={state.inCollection}
           onToggle={(active: boolean) => {
             setInCollection(active);
             onToggle();
           }}
+          className="self-end"
         />
       )}
     </li>

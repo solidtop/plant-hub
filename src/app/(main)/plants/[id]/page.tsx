@@ -1,5 +1,5 @@
 import PlantStat from "@/components/plant/PlantStat";
-import { getPlantById, getUser } from "@/utils/api";
+import { getPlantById } from "@/utils/api";
 import { Metadata } from "next";
 import Image from "next/image";
 import CycleIcon from "/public/icons/cycle-icon.png";
@@ -10,8 +10,8 @@ import HardinessIcon from "/public/icons/hardiness-icon.png";
 import GrowthIcon from "/public/icons/growth-icon.png";
 import { PlantDetails } from "@/types/plant";
 import BackLink from "@/components/link/BackLink";
-import BottomPanel from "@/components/plant/details/BottomPanel";
-import { cookies } from "next/headers";
+import CollectionWrapper from "@/components/plant/details/CollectionWrapper";
+import NoResults from "@/components/NoResults";
 
 export const metadata: Metadata = {
   title: "Plant Details | Plant Hub",
@@ -19,20 +19,19 @@ export const metadata: Metadata = {
 
 type PlantDetailsProps = {
   params: {
-    id: number;
+    id: string;
   };
 };
 
 export default async function PlantDetails({ params }: PlantDetailsProps) {
   const { id } = params;
-  const plant = await getPlantById(id);
+  const plantId = Number.parseInt(id);
+  const plant = await getPlantById(plantId);
 
   if (!plant) {
-    return <main>Not found</main>;
+    return <NoResults text="Plant not found" />;
   }
 
-  const jwt = cookies().get("token")?.value;
-  const user = await getUser(jwt);
   const plantStats = initPlantStats(plant);
 
   return (
@@ -56,6 +55,8 @@ export default async function PlantDetails({ params }: PlantDetailsProps) {
           <h1>{plant.commonName}</h1>
           <h3 className="text-xl italic">{plant.scientificName}</h3>
         </span>
+
+        <CollectionWrapper plantId={plantId} />
       </section>
 
       <div className="m-4 p-4 bg-accent-color bg-opacity-30 rounded-md">
@@ -75,8 +76,6 @@ export default async function PlantDetails({ params }: PlantDetailsProps) {
         <h2 className="my-2">Description</h2>
         <p>{plant.description}</p>
       </section>
-
-      {user && <BottomPanel />}
     </main>
   );
 }
