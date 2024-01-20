@@ -1,4 +1,4 @@
-import BackLink from "@/components/link/BackLink";
+import BackButton from "@/components/button/BackButton";
 import MyPlantList from "@/components/plant/MyPlantList";
 import { getUser } from "@/utils/api";
 import { cookies } from "next/headers";
@@ -9,7 +9,7 @@ export default async function MyPlants() {
 
   return (
     <main className="p-4">
-      <BackLink />
+      <BackButton />
 
       <section>
         <h1>{`${

@@ -12,7 +12,14 @@ import UserConverter from "./UserConverter";
 import { cookies } from "next/headers";
 
 export async function getPlants(query: string = "", page: number = 1) {
-  const apiUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}&q=${query}`;
+  const apiUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}&q=${query}&page=${page}`;
+  const payload = await fetchData<ApiData>(apiUrl);
+
+  return payload ? PlantConverter.convertToPlants(payload) : [];
+}
+
+export async function getIndoorPlants() {
+  const apiUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}&indoor=1`;
   const payload = await fetchData<ApiData>(apiUrl);
 
   return payload ? PlantConverter.convertToPlants(payload) : [];
@@ -51,10 +58,10 @@ export async function getPlantsByIds(
   return plants.filter((plant) => plant !== null) as PlantSummary[];
 }
 
-export async function getMyPlants() {
+export async function getMyPlants(page: number = 1) {
   const jwt = cookies().get("token")?.value;
   const user = await getUser(jwt);
-  const myPlants = user ? await getPlantsByIds(user?.plantIds) : [];
+  const myPlants = user ? await getPlantsByIds(user.plantIds, page) : [];
   return myPlants;
 }
 
