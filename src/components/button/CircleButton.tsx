@@ -4,20 +4,26 @@ import { FC } from "react";
 
 type CircleButtonProps = {
   icon: StaticImport;
-  onClick: () => void;
+  alt: string;
+  iconWidth?: number;
+  iconHeight?: number;
+  onClick?: () => void;
   className?: string;
 };
 
 const CircleButton: FC<CircleButtonProps> = ({
   icon,
+  alt,
+  iconWidth = 12,
+  iconHeight = 18,
   onClick,
   className = "",
 }) => {
   return (
     <button onClick={onClick} className={className}>
-      <div className="w-12 h-12 p-1 bg-accent-color bg-opacity-30 rounded-full">
+      <div className="w-[50px] h-[50px] p-[5px] bg-accent-color bg-opacity-30 rounded-full backdrop-blur-md">
         <div className="w-full h-full flex justify-center items-center bg-primary-color rounded-full">
-          <Image src={icon} width={12} height={18} alt="Button icon" />
+          <Image src={icon} width={iconWidth} height={iconHeight} alt={alt} />
         </div>
       </div>
     </button>

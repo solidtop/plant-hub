@@ -27,7 +27,7 @@ const NavItem: FC<NavItemProps> = ({
       ) : (
         <SecondaryLink
           href={path}
-          className={`${pathname === path ? "bg-slate-700" : ""}`}
+          className={`${pathname === path ? "bg-primary-color/100" : ""}`}
         >
           {name}
         </SecondaryLink>

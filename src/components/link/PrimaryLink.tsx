@@ -16,7 +16,7 @@ const PrimaryLink: FC<PrimaryLinkProps> = ({
   return (
     <Link
       href={href}
-      className={`flex justify-center items-center w-28 h-14 rounded-md bg-primary-color ${className}`}
+      className={`w-[100px] h-[50px] flex justify-center items-center text-xl rounded-md bg-secondary-color ${className}`}
     >
       {children}
     </Link>

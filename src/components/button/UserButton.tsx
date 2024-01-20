@@ -7,6 +7,7 @@ import Dropdown from "../Dropdown";
 import LogoutIcon from "/public/icons/right-from-bracket-solid.svg";
 import useUser from "@/hooks/useUser";
 import UserDto from "@/types/UserDTO";
+import CircleButton from "./CircleButton";
 
 type UserButtonProps = {
   user: UserDto;
@@ -36,13 +37,13 @@ const UserButton: FC<UserButtonProps> = ({ user }) => {
 
   return (
     <div ref={dropdownRef} className="relative">
-      <button onClick={() => setOpen((open) => !open)}>
-        <div className="w-12 h-12 p-1 bg-accent-color bg-opacity-30 rounded-full">
-          <div className="w-full h-full flex justify-center items-center bg-primary-color rounded-full">
-            <Image src={UserIcon} width={20} height={20} alt="User icon" />
-          </div>
-        </div>
-      </button>
+      <CircleButton
+        onClick={() => setOpen((open) => !open)}
+        icon={UserIcon}
+        iconWidth={20}
+        iconHeight={20}
+        alt="User icon"
+      />
 
       {open && (
         <Dropdown>
