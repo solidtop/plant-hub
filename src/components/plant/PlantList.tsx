@@ -5,7 +5,6 @@ import PlantCard from "./PlantCard";
 import { getMyPlantIds } from "@/utils/api";
 import { PlantSummary } from "@/types/plant";
 import useUser from "@/hooks/useUser";
-import Spinner from "../Spinner";
 
 type PlantListProps = {
   plants: PlantSummary[];
@@ -15,22 +14,15 @@ type PlantListProps = {
 const PlantList: FC<PlantListProps> = ({ plants, onToggle }) => {
   const { user } = useUser();
   const [myPlantIds, setMyPlantIds] = useState<number[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadPlantIds = async () => {
-      setLoading(true);
       const ids = await getMyPlantIds();
       setMyPlantIds(ids);
-      setLoading(false);
     };
 
     loadPlantIds();
   }, []);
-
-  if (loading) {
-    return <Spinner />;
-  }
 
   return (
     <ul>
