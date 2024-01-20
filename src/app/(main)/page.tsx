@@ -7,7 +7,7 @@ import NoResults from "@/components/NoResults";
 import InfiniteScrollPlants from "@/components/InfiniteScrollPlants";
 
 export default async function Home() {
-  const loggedIn = cookies().get("token")?.value;
+  const loggedIn = cookies().get("token")?.value ? true : false;
   const plants = await getIndoorPlants();
 
   return (
@@ -18,13 +18,13 @@ export default async function Home() {
         <div className="relative">
           <Image
             src="/images/hero-placeholder.png"
-            width={500}
-            height={500}
+            width={300}
+            height={300}
             alt="Hero image"
-            className="w-full max-h-96 object-cover -z-10"
+            className="w-full max-h-96 object-cover"
           />
 
-          <section className="absolute inset-4 gap-4">
+          <section className="absolute inset-0 h-fit p-4 bg-gradient-to-b from-primary-color to-transparent backdrop-blur-md">
             <h1>Welcome to Plant Hub!</h1>
             <p className="w-52 mt-4 text-xl">
               Sign up to keep track of your plants

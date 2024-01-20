@@ -16,7 +16,7 @@ const SecondaryLink: FC<SecondaryLinkProps> = ({
   return (
     <Link
       href={href}
-      className={`flex justify-center items-center w-28 h-14 rounded-md border-2 border-primary-color ${className}`}
+      className={`min-w-[100px] min-h-[50px] flex justify-center items-center px-3 text-xl bg-primary-color bg-opacity-40 rounded-md border-2 border-primary-color ${className}`}
     >
       {children}
     </Link>

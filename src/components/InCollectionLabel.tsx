@@ -12,7 +12,7 @@ const InCollectionLabel: FC<InCollectionLabelProps> = ({
   return (
     <label
       htmlFor={htmlFor}
-      className={`p-1 bg-primary-color bg-opacity-30 rounded-md ${className}`}
+      className={`px-2 bg-primary-color bg-opacity-60 rounded-md backdrop-blur-xl ${className}`}
     >
       In your collection
     </label>

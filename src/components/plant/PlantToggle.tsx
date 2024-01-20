@@ -53,11 +53,13 @@ const PlantToggle: FC<PlantToggleProps> = ({
   return (
     <PrimaryButton
       onClick={handleToggle}
-      className={`z-20 gap-2 ${active ? "bg-opacity-100" : ""} ${className}`}
+      className={`z-20 gap-2 ${
+        active ? "bg-primary-color/100" : ""
+      } ${className}`}
     >
       {active ? (
         <>
-          Owned
+          Remove
           <Image src={XMarkIcon} width={15} height={15} alt="X mark icon" />
         </>
       ) : (
