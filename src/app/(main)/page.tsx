@@ -1,18 +1,14 @@
-import PlantList from "@/components/plant/PlantList";
 import PrimaryLink from "@/components/link/PrimaryLink";
 import Searchbar from "@/components/input/Searchbar";
 import Image from "next/image";
-import { getPlants } from "@/utils/api";
+import { getIndoorPlants } from "@/utils/api";
 import { cookies } from "next/headers";
 import NoResults from "@/components/NoResults";
+import InfiniteScrollPlants from "@/components/InfiniteScrollPlants";
 
 export default async function Home() {
   const loggedIn = cookies().get("token")?.value;
-  const plants = await getPlants();
-
-  if (plants.length === 0) {
-    return <NoResults text="Could not find any plants" />;
-  }
+  const plants = await getIndoorPlants();
 
   return (
     <main>
@@ -44,7 +40,11 @@ export default async function Home() {
       <section className="p-4">
         <h2>Browse plants</h2>
 
-        <PlantList plants={plants} />
+        {plants.length === 0 ? (
+          <NoResults text="Could not find any plants" />
+        ) : (
+          <InfiniteScrollPlants initialPlants={plants} />
+        )}
       </section>
     </main>
   );

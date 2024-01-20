@@ -9,9 +9,9 @@ import CareIcon from "/public/icons/care-icon.png";
 import HardinessIcon from "/public/icons/hardiness-icon.png";
 import GrowthIcon from "/public/icons/growth-icon.png";
 import { PlantDetails } from "@/types/plant";
-import BackLink from "@/components/link/BackLink";
 import CollectionWrapper from "@/components/plant/details/CollectionWrapper";
 import NoResults from "@/components/NoResults";
+import BackButton from "@/components/button/BackButton";
 
 export const metadata: Metadata = {
   title: "Plant Details | Plant Hub",
@@ -49,7 +49,7 @@ export default async function PlantDetails({ params }: PlantDetailsProps) {
 
         <div className="absolute top-0 w-full h-52 bg-gradient-to-b from-black via-transparent to-black"></div>
 
-        <BackLink className="absolute left-4 top-4" />
+        <BackButton className="absolute left-4 top-4" />
 
         <span className="absolute left-4 bottom-6">
           <h1>{plant.commonName}</h1>

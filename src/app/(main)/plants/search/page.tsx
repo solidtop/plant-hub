@@ -1,6 +1,6 @@
+import InfiniteScrollPlants from "@/components/InfiniteScrollPlants";
 import NoResults from "@/components/NoResults";
 import Searchbar from "@/components/input/Searchbar";
-import PlantList from "@/components/plant/PlantList";
 import { getPlants } from "@/utils/api";
 import { Metadata } from "next";
 
@@ -18,10 +18,6 @@ export default async function Search({ searchParams }: SearchProps) {
   const query = searchParams.query || "";
   const plants = await getPlants(query);
 
-  if (plants.length === 0) {
-    return <NoResults text={`No results for "${query}"`} />;
-  }
-
   return (
     <main>
       <Searchbar />
@@ -29,7 +25,11 @@ export default async function Search({ searchParams }: SearchProps) {
       <section className="p-4">
         <h1>{`Results for "${query}"`}</h1>
 
-        <PlantList plants={plants} />
+        {plants.length == 0 ? (
+          <NoResults text="No results" />
+        ) : (
+          <InfiniteScrollPlants initialPlants={plants} query={query} />
+        )}
       </section>
     </main>
   );
