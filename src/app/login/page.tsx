@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import LoginForm from "@/components/auth/LoginForm";
 import { cookies } from "next/headers";
-import { getUser } from "@/utils/api";
+import { getUser } from "@/lib/users";
 import { redirect } from "next/navigation";
 import BackButton from "@/components/button/BackButton";
 

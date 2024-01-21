@@ -4,9 +4,8 @@ import { FC, FormEvent, useState } from "react";
 import UsernameField from "../input/UsernameField";
 import ValidationError from "@/responses/ValidationError";
 import useUser from "@/hooks/useUser";
-import RegisterRequest from "@/types/RegisterRequest";
+import { RegisterRequest } from "@/types/request";
 import PasswordField from "../input/PasswordField";
-import InputField from "../input/InputField";
 import { registerFormSchema } from "@/utils/validations";
 import PrimaryButton from "../button/PrimaryButton";
 import ErrorMessage from "../input/ErrorMessage";
@@ -72,7 +71,7 @@ const RegisterForm: FC = () => {
   }
 
   return (
-    <div className="flex flex-col my-6 p-4 bg-accent-color/30 rounded-md backdrop-blur-md">
+    <div className="flex flex-col my-6 p-4 bg-accent-color/30 rounded-md backdrop-blur-md border-t-[1px] border-white/20">
       <h1 className="mb-4 mx-auto">Sign up</h1>
 
       <form onSubmit={handleSubmit} id="register-form">
@@ -107,7 +106,7 @@ const RegisterForm: FC = () => {
         </PrimaryButton>
 
         <div className="flex justify-between items-center">
-          <label>Already have a account?</label>
+          <label className="text-sm">Already have a account?</label>
           <SecondaryLink href="/login">Log in</SecondaryLink>
         </div>
       </form>

@@ -4,7 +4,7 @@ import { PlantSummary } from "@/types/plant";
 import { FC, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Spinner from "./Spinner";
-import { getPlants } from "@/utils/api";
+import { getPlants } from "@/lib/plants";
 import PlantList from "./plant/PlantList";
 import ScrollToTopButton from "./button/ScrollToTopButton";
 

@@ -2,7 +2,7 @@
 
 import { FC, useEffect, useState } from "react";
 import PlantCard from "./PlantCard";
-import { getMyPlantIds } from "@/utils/api";
+import { getMyPlantIds } from "@/lib/plants";
 import { PlantSummary } from "@/types/plant";
 import useUser from "@/hooks/useUser";
 

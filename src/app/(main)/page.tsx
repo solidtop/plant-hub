@@ -1,7 +1,7 @@
 import PrimaryLink from "@/components/link/PrimaryLink";
 import Searchbar from "@/components/input/Searchbar";
 import Image from "next/image";
-import { getIndoorPlants } from "@/utils/api";
+import { getIndoorPlants } from "@/lib/plants";
 import { cookies } from "next/headers";
 import NoResults from "@/components/NoResults";
 import InfiniteScrollPlants from "@/components/InfiniteScrollPlants";

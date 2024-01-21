@@ -1,5 +1,5 @@
 import PlantStat from "@/components/plant/PlantStat";
-import { getPlantById } from "@/utils/api";
+import { getPlantById } from "@/lib/plants";
 import { Metadata } from "next";
 import Image from "next/image";
 import CycleIcon from "/public/icons/cycle-icon.png";
@@ -13,6 +13,7 @@ import CollectionWrapper from "@/components/plant/details/CollectionWrapper";
 import NoResults from "@/components/NoResults";
 import BackButton from "@/components/button/BackButton";
 import { cookies } from "next/headers";
+import ImageNotFound from "/public/images/imagenotfound.png";
 
 export const metadata: Metadata = {
   title: "Plant Details | Plant Hub",
@@ -39,9 +40,17 @@ export default async function PlantDetails({ params }: PlantDetailsProps) {
   return (
     <main>
       <section className="relative z-50">
-        {plant.imageUrl && (
+        {plant.imageUrl ? (
           <Image
             src={plant.imageUrl}
+            width={300}
+            height={300}
+            alt="Plant image"
+            className="w-full h-52 object-cover object-bottom"
+          />
+        ) : (
+          <Image
+            src={ImageNotFound}
             width={300}
             height={300}
             alt="Plant image"
@@ -61,7 +70,7 @@ export default async function PlantDetails({ params }: PlantDetailsProps) {
         {loggedIn && <CollectionWrapper plantId={plantId} />}
       </section>
 
-      <div className="mx-4 mt-6 p-4 bg-accent-color bg-opacity-30 rounded-md backdrop-blur-md">
+      <div className="mx-4 mt-6 p-4 bg-accent-color bg-opacity-30 rounded-md backdrop-blur-md border-t-[1px] border-white/20">
         <ul className="flex flex-col gap-2">
           {plantStats.map((stat, index) => (
             <PlantStat

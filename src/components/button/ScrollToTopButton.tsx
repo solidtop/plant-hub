@@ -29,8 +29,6 @@ const ScrollToTopButton: FC = () => {
       <CircleButton
         icon={AngleUpIcon}
         alt="Angle up icon"
-        iconWidth={20}
-        iconHeight={12}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       />
     </div>

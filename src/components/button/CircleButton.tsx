@@ -14,8 +14,8 @@ type CircleButtonProps = {
 const CircleButton: FC<CircleButtonProps> = ({
   icon,
   alt,
-  iconWidth = 12,
-  iconHeight = 18,
+  iconWidth = 0,
+  iconHeight = 0,
   onClick,
   className = "",
 }) => {

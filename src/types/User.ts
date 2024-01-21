@@ -1,4 +1,4 @@
-type User = {
+export type User = {
   _id: string;
   username: string;
   password: string;
@@ -9,4 +9,10 @@ type User = {
   toJSON: () => { _id: string };
 };
 
-export default User;
+export type UserDTO = {
+  id: string;
+  username: string;
+  firstName?: string;
+  lastName?: string;
+  plantIds: number[];
+};
