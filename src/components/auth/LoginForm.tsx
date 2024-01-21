@@ -82,7 +82,7 @@ const LoginForm: FC = () => {
         </PrimaryButton>
 
         <div className="flex justify-between items-center">
-          <label className="text-sm">Don't have a account?</label>
+          <label className="text-sm">{"Don't have a account?"}</label>
           <SecondaryLink href="/signup">Sign up</SecondaryLink>
         </div>
       </form>

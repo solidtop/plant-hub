@@ -1,5 +1,4 @@
-import User from "@/types/asd";
-import UserDTO from "@/types/UserDTO";
+import { User, UserDTO } from "@/types/user";
 
 class UserConverter {
   static convertToDTO(user: User): UserDTO {
