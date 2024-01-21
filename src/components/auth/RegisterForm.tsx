@@ -12,9 +12,10 @@ import PrimaryButton from "../button/PrimaryButton";
 import ErrorMessage from "../input/ErrorMessage";
 import SecondaryLink from "../link/SecondaryLink";
 import NameField from "../input/NameField";
+import Spinner from "../Spinner";
 
 const RegisterForm: FC = () => {
-  const { register } = useUser();
+  const { register, loading } = useUser();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -65,6 +66,10 @@ const RegisterForm: FC = () => {
 
     window.location.replace("/");
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="flex flex-col my-6 p-4 bg-accent-color/30 rounded-md backdrop-blur-md">
