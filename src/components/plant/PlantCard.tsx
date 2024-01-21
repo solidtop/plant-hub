@@ -2,7 +2,7 @@
 
 import { PlantSummary } from "@/types/plant";
 import Image from "next/image";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import InfoIcon from "/public/icons/info-solid.svg";
 import SunIcon from "/public/icons/sun-icon.png";
 import WaterIcon from "/public/icons/water-icon.png";
@@ -10,26 +10,38 @@ import CareIcon from "/public/icons/care-icon.png";
 import PlantStat from "./PlantStat";
 import InCollectionLabel from "../InCollectionLabel";
 import Link from "next/link";
-import TogglePlantButton from "../button/TogglePlantButton";
-import useUser from "@/hooks/useUser";
+import PlantToggle from "./PlantToggle";
+import ImageNotFound from "/public/images/imagenotfound.png";
+import CircleButton from "../button/CircleButton";
+
+type CardState = {
+  loggedIn: boolean;
+  inCollection: boolean;
+};
 
 type PlantCardProps = {
   id: number;
   plant: PlantSummary;
+  state: CardState;
+  onToggle?: () => void;
 };
 
-const PlantCard: FC<PlantCardProps> = ({ id, plant }) => {
-  const { user } = useUser();
-  const [inCollection, setInCollection] = useState(false);
+const PlantCard: FC<PlantCardProps> = ({
+  id,
+  plant,
+  state,
+  onToggle = () => {},
+}) => {
+  const [inCollection, setInCollection] = useState(state.inCollection);
 
-  const handleToggle = () => {
-    setInCollection((inCollection) => !inCollection);
-  };
+  useEffect(() => {
+    setInCollection(state.inCollection);
+  }, [state.inCollection]);
 
   return (
     <li
       id={id.toString()}
-      className="relative flex flex-col my-6 p-4 bg-accent-color rounded-lg"
+      className="relative flex flex-col my-6 p-4 bg-accent-color bg-opacity-20 rounded-lg backdrop-blur-md shadow-md shadow-black-trans"
     >
       <Link href={`/plants/${id}`} className="absolute inset-0 z-10" />
 
@@ -40,11 +52,11 @@ const PlantCard: FC<PlantCardProps> = ({ id, plant }) => {
             width={300}
             height={300}
             alt="Plant image"
-            className="w-full h-52 object-cover rounded-lg"
+            className="w-full h-48 object-cover object-bottom rounded-lg"
           />
         ) : (
           <Image
-            src="/public/images/imagenotfound.png"
+            src={ImageNotFound}
             width={300}
             height={300}
             alt="Image not found"
@@ -59,14 +71,15 @@ const PlantCard: FC<PlantCardProps> = ({ id, plant }) => {
           />
         )}
 
-        <div className="absolute top-1/2 right-4 transform -translate-y-1/2 w-12 h-12 p-1 bg-accent-color bg-opacity-30 rounded-full">
-          <div className="w-full h-full flex justify-center items-center bg-primary-color rounded-full">
-            <Image src={InfoIcon} width={8} height={21} alt="Info icon" />
-          </div>
-        </div>
+        <CircleButton
+          icon={InfoIcon}
+          alt="Info icon"
+          iconWidth={8}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2"
+        />
       </div>
 
-      <h3 className="my-2">{plant.commonName}</h3>
+      <h3 className="my-2 capitalize">{plant.commonName}</h3>
 
       <ul className="flex flex-col gap-2">
         <PlantStat key={1} icon={SunIcon} labels={plant.sunlight} size={20} />
@@ -74,8 +87,16 @@ const PlantCard: FC<PlantCardProps> = ({ id, plant }) => {
         <PlantStat key={3} icon={CareIcon} label="Not available" size={20} />
       </ul>
 
-      {user && (
-        <TogglePlantButton active={inCollection} onClick={handleToggle} />
+      {state.loggedIn && (
+        <PlantToggle
+          plantId={id}
+          inCollection={state.inCollection}
+          onToggle={(active: boolean) => {
+            setInCollection(active);
+            onToggle();
+          }}
+          className="self-end"
+        />
       )}
     </li>
   );

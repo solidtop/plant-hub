@@ -7,18 +7,26 @@
 }
 
 body {
-  background-color: #163020;
+  background-image: url("/images/plant-background.png");
+  background-color: #1B3016;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 input:focus {
-  outline: none;
+  outline: 2px solid #519259;
   border: none;
 }
 
 h1 {
-  font-size: 1.8rem;
+  font-size: 1.875rem;
 }
 
 h2 {
   font-size: 1.5rem;
 }
+
+h3 {
+  font-size: 1.25rem;
+}
+

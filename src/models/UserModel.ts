@@ -14,6 +14,7 @@ const userSchema = new Schema<User>({
   },
   firstName: String,
   lastName: String,
+  plantIds: Array<Number>,
 });
 
 const UserModel =

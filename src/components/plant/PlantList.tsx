@@ -1,23 +1,42 @@
-import { FC } from "react";
+"use client";
+
+import { FC, useEffect, useState } from "react";
 import PlantCard from "./PlantCard";
-import { getPlants } from "@/utils/api";
-import NoResults from "../NoResults";
+import { getMyPlantIds } from "@/utils/api";
+import { PlantSummary } from "@/types/plant";
+import useUser from "@/hooks/useUser";
 
 type PlantListProps = {
-  query?: string;
+  plants: PlantSummary[];
+  onToggle?: (plantId: number) => void;
 };
 
-const PlantList: FC<PlantListProps> = async ({ query = "" }) => {
-  const plants = await getPlants(query);
+const PlantList: FC<PlantListProps> = ({ plants, onToggle }) => {
+  const { user } = useUser();
+  const [myPlantIds, setMyPlantIds] = useState<number[]>([]);
 
-  if (plants.length == 0) {
-    return <NoResults />;
-  }
+  useEffect(() => {
+    const loadPlantIds = async () => {
+      const ids = await getMyPlantIds();
+      setMyPlantIds(ids);
+    };
+
+    loadPlantIds();
+  }, []);
 
   return (
     <ul>
       {plants.map((plant) => (
-        <PlantCard key={plant.id} id={plant.id} plant={plant} />
+        <PlantCard
+          key={plant.id}
+          id={plant.id}
+          plant={plant}
+          state={{
+            loggedIn: user ? true : false,
+            inCollection: myPlantIds.includes(plant.id),
+          }}
+          onToggle={onToggle ? () => onToggle(plant.id) : undefined}
+        />
       ))}
     </ul>
   );

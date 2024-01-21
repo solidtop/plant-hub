@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import ErrorResponse from "@/responses/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
 import connectToDatabase from "@/utils/database";
-import UserDto from "@/types/UserDto";
 import { getUser } from "@/utils/api";
+import UserConverter from "@/utils/UserConverter";
 
 export async function GET(req: NextRequest) {
   await connectToDatabase();
@@ -19,12 +19,7 @@ export async function GET(req: NextRequest) {
     return ErrorResponse.create("user not found", HttpStatus.NOT_FOUND);
   }
 
-  const userDto: UserDto = {
-    id: user._id,
-    username: user.username,
-    firstName: user.firstName,
-    lastName: user.lastName,
-  };
+  const userDTO = UserConverter.convertToDTO(user);
 
-  return NextResponse.json(userDto);
+  return NextResponse.json(userDTO);
 }

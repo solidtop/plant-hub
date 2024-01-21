@@ -45,3 +45,7 @@ export const registerFormSchema = z
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
+
+export function isNumber(value: any): value is number {
+  return typeof value === "number" && !isNaN(value);
+}

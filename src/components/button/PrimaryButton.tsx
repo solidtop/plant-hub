@@ -17,7 +17,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
     <button
       type={type}
       onClick={onClick}
-      className={`flex justify-center items-center w-28 h-14 rounded-md bg-primary-color bg-opacity-40 border-2 border-primary-color ${className}`}
+      className={`min-w-[100px] min-h-[50px] flex justify-center items-center text-xl rounded-md bg-secondary-color ${className}`}
     >
       {children}
     </button>
