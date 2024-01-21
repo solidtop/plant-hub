@@ -12,7 +12,7 @@ import UserConverter from "./UserConverter";
 import { cookies } from "next/headers";
 
 export async function getPlants(query: string = "", page: number = 1) {
-  const apiUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}&q=${query}&page=${page}`;
+  const apiUrl = `https://perenual.com/api/species-list?key=${process.env.API_KEY}&q=${query}&page=${page}&order=asc`;
   const payload = await fetchData<ApiData>(apiUrl);
 
   return payload ? PlantConverter.convertToPlants(payload) : [];
