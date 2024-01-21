@@ -12,7 +12,7 @@ export default async function MyPlants() {
       <BackButton />
 
       <section>
-        <h1>{`${
+        <h1 className="my-4">{`${
           user?.firstName ? user.firstName : user?.username
         }'s plants`}</h1>
 

@@ -3,9 +3,10 @@ import LoginForm from "@/components/auth/LoginForm";
 import { cookies } from "next/headers";
 import { getUser } from "@/utils/api";
 import { redirect } from "next/navigation";
+import BackButton from "@/components/button/BackButton";
 
 export const metadata: Metadata = {
-  title: "Login | Plant Hub",
+  title: "Log in | Plant Hub",
 };
 
 export default async function Login() {
@@ -18,8 +19,8 @@ export default async function Login() {
   }
 
   return (
-    <main>
-      <h1>Login</h1>
+    <main className="p-4">
+      <BackButton />
       <LoginForm />
     </main>
   );

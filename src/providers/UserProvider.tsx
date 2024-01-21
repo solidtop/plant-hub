@@ -65,6 +65,8 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
   }, []);
 
   const login = async (username: string, password: string) => {
+    setLoading(true);
+
     const payload = await fetchData<LoginPayload>(
       "/api/auth/login",
       HttpMethod.POST,
@@ -95,6 +97,8 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
     firstName: string,
     lastName: string
   ) => {
+    setLoading(true);
+
     const payload = await fetchData<RegisterPayload>(
       "api/auth/register",
       HttpMethod.POST,
@@ -110,6 +114,8 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
     if (payload && (!payload.error || !payload.errors)) {
       setUser(payload);
     }
+
+    setLoading(false);
 
     return payload;
   };

@@ -15,7 +15,7 @@ const Searchbar: FC = () => {
   };
 
   return (
-    <nav className="sticky top-0 left-0 mt-1 p-2 rounded-md bg-accent-color bg-opacity-30 backdrop-blur-xl shadow-lg shadow-black-trans z-50">
+    <nav className="sticky top-0 left-0 mt-1 p-2 rounded-md bg-accent-color bg-opacity-30 backdrop-blur-xl shadow-lg shadow-black-trans z-10">
       <form onSubmit={handleSearch}>
         <div className="flex items-center">
           <Image

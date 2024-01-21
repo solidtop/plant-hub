@@ -3,9 +3,10 @@ import RegisterForm from "@/components/auth/RegisterForm";
 import { cookies } from "next/headers";
 import { getUser } from "@/utils/api";
 import { redirect } from "next/navigation";
+import BackButton from "@/components/button/BackButton";
 
 export const metadata: Metadata = {
-  title: "Signup | Plant Hub",
+  title: "Sign up | Plant Hub",
 };
 
 export default async function Signup() {
@@ -17,8 +18,8 @@ export default async function Signup() {
   }
 
   return (
-    <main>
-      <h1>Register</h1>
+    <main className="p-4 h-screen">
+      <BackButton />
       <RegisterForm />
     </main>
   );

@@ -9,6 +9,9 @@ import PasswordField from "../input/PasswordField";
 import InputField from "../input/InputField";
 import { registerFormSchema } from "@/utils/validations";
 import PrimaryButton from "../button/PrimaryButton";
+import ErrorMessage from "../input/ErrorMessage";
+import SecondaryLink from "../link/SecondaryLink";
+import NameField from "../input/NameField";
 
 const RegisterForm: FC = () => {
   const { register } = useUser();
@@ -64,46 +67,46 @@ const RegisterForm: FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} id="register-form">
-      <UsernameField
-        username={username}
-        setUsername={setUsername}
-        errorMessage={validationError?.errors?.username?.message}
-      />
-      <PasswordField
-        password={password}
-        setPassword={setPassword}
-        errorMessage={validationError?.errors?.password?.message}
-      />
-      <PasswordField
-        label="Confirm password"
-        id="confirmPassword"
-        password={confirmPassword}
-        setPassword={setConfirmPassword}
-        errorMessage={validationError?.errors?.confirmPassword?.message}
-      />
-      <InputField
-        type="text"
-        label="First name"
-        id="firstName"
-        placeholder="Enter your first name"
-        value={firstName}
-        setValue={setFirstName}
-        errorMessage={validationError?.errors?.firstName?.message}
-      />
-      <InputField
-        type="text"
-        label="Last name"
-        id="lastName"
-        placeholder="Enter your last name"
-        value={lastName}
-        setValue={setLastName}
-        errorMessage={validationError?.errors?.firstName?.message}
-      />
-      <label htmlFor="register-form">{errorMessage}</label>
+    <div className="flex flex-col my-6 p-4 bg-accent-color/30 rounded-md backdrop-blur-md">
+      <h1 className="mb-4 mx-auto">Sign up</h1>
 
-      <PrimaryButton type="submit">Submit</PrimaryButton>
-    </form>
+      <form onSubmit={handleSubmit} id="register-form">
+        <UsernameField
+          username={username}
+          setUsername={setUsername}
+          errorMessage={validationError?.errors?.username?.message}
+        />
+        <PasswordField
+          password={password}
+          setPassword={setPassword}
+          errorMessage={validationError?.errors?.password?.message}
+        />
+        <PasswordField
+          label="Confirm password"
+          id="confirmPassword"
+          password={confirmPassword}
+          setPassword={setConfirmPassword}
+          errorMessage={validationError?.errors?.confirmPassword?.message}
+        />
+        <NameField name={firstName} setName={setFirstName} />
+        {errorMessage && (
+          <ErrorMessage
+            htmlFor="register-form"
+            message={errorMessage}
+            className="my-6"
+          />
+        )}
+
+        <PrimaryButton type="submit" className="w-full my-8">
+          Sign up
+        </PrimaryButton>
+
+        <div className="flex justify-between items-center">
+          <label>Already have a account?</label>
+          <SecondaryLink href="/login">Log in</SecondaryLink>
+        </div>
+      </form>
+    </div>
   );
 };
 
