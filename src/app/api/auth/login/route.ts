@@ -7,8 +7,8 @@ import HttpStatus from "@/enums/HttpStatus";
 import UserModel from "@/models/UserModel";
 import connectToDatabase from "@/utils/database";
 import ValidationErrorResponse from "@/responses/ValidationErrorResponse";
-import LoginRequest from "@/types/LoginRequest";
-import User from "@/types/User";
+import { LoginRequest } from "@/types/request";
+import { User } from "@/types/user";
 import UserConverter from "@/utils/UserConverter";
 
 export async function POST(req: NextRequest) {

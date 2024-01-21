@@ -1,8 +1,7 @@
-import { FC, Suspense } from "react";
+import { FC } from "react";
 import Image from "next/image";
 import Navbar from "./nav/Navbar";
 import Link from "next/link";
-import Spinner from "./Spinner";
 
 const Header: FC = () => {
   return (
@@ -11,9 +10,7 @@ const Header: FC = () => {
         <Image src="/images/logo.png" width={50} height={50} alt="Logo" />
       </Link>
 
-      <Suspense fallback={<Spinner />}>
-        <Navbar />
-      </Suspense>
+      <Navbar />
     </header>
   );
 };

@@ -1,4 +1,4 @@
-import { getPlants } from "@/utils/api";
+import { getPlants } from "@/lib/plants";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {

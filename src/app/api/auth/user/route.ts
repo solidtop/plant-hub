@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import ErrorResponse from "@/responses/ErrorResponse";
 import HttpStatus from "@/enums/HttpStatus";
 import connectToDatabase from "@/utils/database";
-import { getUser } from "@/utils/api";
+import { getUser } from "@/lib/users";
 import UserConverter from "@/utils/UserConverter";
 
 export async function GET(req: NextRequest) {

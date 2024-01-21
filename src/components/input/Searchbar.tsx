@@ -19,7 +19,7 @@ const Searchbar: FC = () => {
   }, 300);
 
   return (
-    <nav className="sticky top-0 left-0 mt-1 p-2 rounded-md bg-accent-color bg-opacity-30 backdrop-blur-xl shadow-lg shadow-black-trans z-10">
+    <nav className="sticky top-0 left-0 mt-1 p-2 rounded-md bg-accent-color bg-opacity-30 backdrop-blur-xl shadow-lg shadow-black-trans z-10 border-t-[1px] border-white/20">
       <div className="flex items-center">
         <Image
           src={SearchIcon}

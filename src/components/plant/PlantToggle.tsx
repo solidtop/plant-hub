@@ -44,9 +44,7 @@ const PlantToggle: FC<PlantToggleProps> = ({
     }
 
     if (payload && payload?.error) {
-      // Reset to previous state when there is an error
       setActive((active) => !active);
-      onToggle(!active);
     }
   };
 
@@ -60,12 +58,24 @@ const PlantToggle: FC<PlantToggleProps> = ({
       {active ? (
         <>
           Remove
-          <Image src={XMarkIcon} width={15} height={15} alt="X mark icon" />
+          <Image
+            src={XMarkIcon}
+            width={15}
+            height={15}
+            alt="X mark icon"
+            className="w-auto h-auto"
+          />
         </>
       ) : (
         <>
           Add
-          <Image src={PlusIcon} width={15} height={15} alt="Plus icon" />
+          <Image
+            src={PlusIcon}
+            width={15}
+            height={15}
+            alt="Plus icon"
+            className="w-auto h-auto"
+          />
         </>
       )}
     </SecondaryButton>

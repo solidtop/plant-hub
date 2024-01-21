@@ -3,7 +3,7 @@
 import InCollectionLabel from "@/components/InCollectionLabel";
 import Spinner from "@/components/Spinner";
 import PlantToggle from "@/components/plant/PlantToggle";
-import { isInCollection } from "@/utils/api";
+import { isInCollection } from "@/lib/plants";
 import { FC, useEffect, useState } from "react";
 
 type CollectionWrapperProps = {
@@ -28,7 +28,7 @@ const CollectionWrapper: FC<CollectionWrapperProps> = ({ plantId }) => {
   return (
     <>
       {inCollection && (
-        <InCollectionLabel className="absolute right-4 -bottom-3 bg-accent-color/30" />
+        <InCollectionLabel className="absolute right-4 -bottom-3 bg-accent-color/40" />
       )}
 
       <section className="fixed bottom-0 w-full h-[70px] flex justify-center items-center bg-accent-color/30 rounded-t-md backdrop-blur-lg z-50">

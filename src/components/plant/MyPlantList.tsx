@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import { getMyPlants } from "@/utils/api";
+import { getMyPlants } from "@/lib/plants";
 import { PlantSummary } from "@/types/plant";
 import PlantList from "./PlantList";
 import NoResults from "../NoResults";

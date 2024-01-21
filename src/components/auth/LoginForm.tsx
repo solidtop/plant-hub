@@ -7,7 +7,7 @@ import PrimaryButton from "../button/PrimaryButton";
 import useUser from "@/hooks/useUser";
 import { loginFormSchema } from "@/utils/validations";
 import ValidationError from "@/responses/ValidationError";
-import LoginRequest from "@/types/LoginRequest";
+import { LoginRequest } from "@/types/request";
 import ErrorMessage from "../input/ErrorMessage";
 import SecondaryLink from "../link/SecondaryLink";
 import Spinner from "../Spinner";
@@ -55,7 +55,7 @@ const LoginForm: FC = () => {
   }
 
   return (
-    <div className="flex flex-col my-20 p-4 bg-accent-color/30 rounded-md backdrop-blur-md">
+    <div className="flex flex-col my-20 p-4 bg-accent-color/30 rounded-md backdrop-blur-md border-t-[1px] border-white/20">
       <h1 className="mb-4 mx-auto">Login</h1>
 
       <form onSubmit={handleLogin} id="login-form">
@@ -82,7 +82,7 @@ const LoginForm: FC = () => {
         </PrimaryButton>
 
         <div className="flex justify-between items-center">
-          <label>Don't have a account?</label>
+          <label className="text-sm">Don't have a account?</label>
           <SecondaryLink href="/signup">Sign up</SecondaryLink>
         </div>
       </form>

@@ -6,11 +6,11 @@ import Image from "next/image";
 import Dropdown from "../Dropdown";
 import LogoutIcon from "/public/icons/right-from-bracket-solid.svg";
 import useUser from "@/hooks/useUser";
-import UserDto from "@/types/UserDTO";
+import { UserDTO } from "@/types/user";
 import CircleButton from "./CircleButton";
 
 type UserButtonProps = {
-  user: UserDto;
+  user: UserDTO;
 };
 
 const UserButton: FC<UserButtonProps> = ({ user }) => {

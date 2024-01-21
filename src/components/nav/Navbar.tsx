@@ -1,6 +1,6 @@
 import { FC } from "react";
 import UserButton from "../button/UserButton";
-import { getUserDTO } from "@/utils/api";
+import { getUserDTO } from "@/lib/users";
 import { cookies } from "next/headers";
 import NavItem from "./NavItem";
 

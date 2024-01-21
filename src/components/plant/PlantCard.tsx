@@ -3,7 +3,6 @@
 import { PlantSummary } from "@/types/plant";
 import Image from "next/image";
 import { FC, useEffect, useState } from "react";
-import InfoIcon from "/public/icons/info-solid.svg";
 import SunIcon from "/public/icons/sun-icon.png";
 import WaterIcon from "/public/icons/water-icon.png";
 import CareIcon from "/public/icons/care-icon.png";
@@ -12,7 +11,7 @@ import InCollectionLabel from "../InCollectionLabel";
 import Link from "next/link";
 import PlantToggle from "./PlantToggle";
 import ImageNotFound from "/public/images/imagenotfound.png";
-import CircleButton from "../button/CircleButton";
+import PlantDetailsButton from "./PlantDetailsButton";
 
 type CardState = {
   loggedIn: boolean;
@@ -41,7 +40,7 @@ const PlantCard: FC<PlantCardProps> = ({
   return (
     <li
       id={id.toString()}
-      className="relative flex flex-col my-6 p-4 bg-accent-color bg-opacity-20 rounded-lg backdrop-blur-md shadow-md shadow-black-trans"
+      className="relative flex flex-col my-6 p-4 bg-accent-color bg-opacity-20 rounded-lg backdrop-blur-md shadow-md shadow-black-trans border-t-[1px] border-white/20"
     >
       <Link href={`/plants/${id}`} className="absolute inset-0 z-10" />
 
@@ -71,12 +70,7 @@ const PlantCard: FC<PlantCardProps> = ({
           />
         )}
 
-        <CircleButton
-          icon={InfoIcon}
-          alt="Info icon"
-          iconWidth={8}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2"
-        />
+        <PlantDetailsButton />
       </div>
 
       <h3 className="my-2 capitalize">{plant.commonName}</h3>

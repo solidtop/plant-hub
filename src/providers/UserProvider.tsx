@@ -1,20 +1,19 @@
 "use client";
 
-import UserDto from "@/types/UserDTO";
+import { UserDTO } from "@/types/user";
 import ApiError from "@/responses/ApiError";
 import ValidationError from "@/responses/ValidationError";
 import { FC, ReactNode, createContext, useEffect, useState } from "react";
-import LoginRequest from "@/types/LoginRequest";
-import RegisterRequest from "@/types/RegisterRequest";
+import { LoginRequest, RegisterRequest } from "@/types/request";
 import fetchData from "@/utils/fetchData";
 import HttpMethod from "@/enums/HttpMethod";
 
-type UserPayload = UserDto & ApiError;
-type LoginPayload = UserDto & ValidationError<LoginRequest> & ApiError;
-type RegisterPayload = UserDto & ValidationError<RegisterRequest> & ApiError;
+type UserPayload = UserDTO & ApiError;
+type LoginPayload = UserDTO & ValidationError<LoginRequest> & ApiError;
+type RegisterPayload = UserDTO & ValidationError<RegisterRequest> & ApiError;
 
 type UserState = {
-  user: UserDto | null;
+  user: UserDTO | null;
   loading: boolean;
   login: (username: string, password: string) => Promise<LoginPayload | null>;
   logout: () => Promise<void>;
@@ -44,7 +43,7 @@ type UserProviderProps = {
 };
 
 const UserProvider: FC<UserProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<UserDto | null>(null);
+  const [user, setUser] = useState<UserDTO | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

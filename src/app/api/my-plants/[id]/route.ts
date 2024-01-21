@@ -1,6 +1,6 @@
 import HttpStatus from "@/enums/HttpStatus";
 import ErrorResponse from "@/responses/ErrorResponse";
-import { getUser } from "@/utils/api";
+import { getUser } from "@/lib/users";
 import connectToDatabase from "@/utils/database";
 import { isNumber } from "@/utils/validations";
 import { NextRequest, NextResponse } from "next/server";

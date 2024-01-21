@@ -1,7 +1,7 @@
 import InfiniteScrollPlants from "@/components/InfiniteScrollPlants";
 import NoResults from "@/components/NoResults";
 import Searchbar from "@/components/input/Searchbar";
-import { getPlants } from "@/utils/api";
+import { getPlants } from "@/lib/plants";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

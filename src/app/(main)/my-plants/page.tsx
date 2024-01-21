@@ -1,6 +1,6 @@
 import BackButton from "@/components/button/BackButton";
 import MyPlantList from "@/components/plant/MyPlantList";
-import { getUser } from "@/utils/api";
+import { getUser } from "@/lib/users";
 import { cookies } from "next/headers";
 
 export default async function MyPlants() {

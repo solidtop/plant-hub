@@ -1,4 +1,4 @@
-import User from "@/types/User";
+import User from "@/types/asd";
 import UserDTO from "@/types/UserDTO";
 
 class UserConverter {
