@@ -12,6 +12,7 @@ import { PlantDetails } from "@/types/plant";
 import CollectionWrapper from "@/components/plant/details/CollectionWrapper";
 import NoResults from "@/components/NoResults";
 import BackButton from "@/components/button/BackButton";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Plant Details | Plant Hub",
@@ -27,6 +28,7 @@ export default async function PlantDetails({ params }: PlantDetailsProps) {
   const { id } = params;
   const plantId = Number.parseInt(id);
   const plant = await getPlantById(plantId);
+  const loggedIn = cookies().get("token")?.value ? true : false;
 
   if (!plant) {
     return <NoResults text="Plant not found" />;
@@ -36,30 +38,30 @@ export default async function PlantDetails({ params }: PlantDetailsProps) {
 
   return (
     <main>
-      <section className="relative">
+      <section className="relative z-50">
         {plant.imageUrl && (
           <Image
             src={plant.imageUrl}
             width={300}
             height={300}
             alt="Plant image"
-            className="w-full h-52 object-cover"
+            className="w-full h-52 object-cover object-bottom"
           />
         )}
 
-        <div className="absolute top-0 w-full h-52 bg-gradient-to-b from-black via-transparent to-black"></div>
+        <div className="absolute top-0 w-full h-52 bg-gradient-to-b from-transparent via-transparent to-black"></div>
 
         <BackButton className="absolute left-4 top-4" />
 
         <span className="absolute left-4 bottom-6">
-          <h1>{plant.commonName}</h1>
-          <h3 className="text-xl italic">{plant.scientificName}</h3>
+          <h1 className="text-3xl capitalize">{plant.commonName}</h1>
+          <h3 className="text-xl italic capitalize">{plant.scientificName}</h3>
         </span>
 
-        <CollectionWrapper plantId={plantId} />
+        {loggedIn && <CollectionWrapper plantId={plantId} />}
       </section>
 
-      <div className="m-4 p-4 bg-accent-color bg-opacity-30 rounded-md">
+      <div className="mx-4 mt-6 p-4 bg-accent-color bg-opacity-30 rounded-md backdrop-blur-md">
         <ul className="flex flex-col gap-2">
           {plantStats.map((stat, index) => (
             <PlantStat

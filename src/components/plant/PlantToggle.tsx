@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import PrimaryButton from "../button/PrimaryButton";
+import SecondaryButton from "../button/SecondaryButton";
 import PlusIcon from "/public/icons/plus-solid.svg";
 import XMarkIcon from "/public/icons/xmark-solid.svg";
 import Image from "next/image";
@@ -51,7 +51,7 @@ const PlantToggle: FC<PlantToggleProps> = ({
   };
 
   return (
-    <PrimaryButton
+    <SecondaryButton
       onClick={handleToggle}
       className={`z-20 gap-2 ${
         active ? "bg-primary-color/100" : ""
@@ -68,7 +68,7 @@ const PlantToggle: FC<PlantToggleProps> = ({
           <Image src={PlusIcon} width={15} height={15} alt="Plus icon" />
         </>
       )}
-    </PrimaryButton>
+    </SecondaryButton>
   );
 };
 

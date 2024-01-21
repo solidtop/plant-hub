@@ -15,6 +15,7 @@ const BackButton: FC<BackButtonProps> = ({ className }) => {
   return (
     <CircleButton
       icon={AngleLeftIcon}
+      alt="Angle left icon"
       onClick={() => router.back()}
       className={className}
     />

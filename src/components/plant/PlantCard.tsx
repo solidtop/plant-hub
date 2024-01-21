@@ -52,7 +52,7 @@ const PlantCard: FC<PlantCardProps> = ({
             width={300}
             height={300}
             alt="Plant image"
-            className="w-full h-48 object-cover object-bottom6 rounded-lg"
+            className="w-full h-48 object-cover object-bottom rounded-lg"
           />
         ) : (
           <Image

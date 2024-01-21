@@ -1,13 +1,13 @@
 import { FC } from "react";
 
-type PrimaryButtonProps = {
+type SecondaryButtonProps = {
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
   children?: React.ReactNode;
   className?: string;
 };
 
-const PrimaryButton: FC<PrimaryButtonProps> = ({
+const SecondaryButton: FC<SecondaryButtonProps> = ({
   type,
   onClick,
   children,
@@ -17,11 +17,11 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
     <button
       type={type}
       onClick={onClick}
-      className={`min-w-[100px] min-h-[50px] flex justify-center items-center text-xl rounded-md bg-secondary-color ${className}`}
+      className={`flex justify-center items-center w-32 h-14 rounded-md text-xl bg-primary-color bg-opacity-40 border-2 border-primary-color ${className}`}
     >
       {children}
     </button>
   );
 };
 
-export default PrimaryButton;
+export default SecondaryButton;

@@ -13,6 +13,7 @@ const config: Config = {
         "secondary-color": "#519259",
         "accent-color": "#A7B77B",
         "black-trans": "rgba(0, 0, 0, 0.4)",
+        "error-color": "#4A2520",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
