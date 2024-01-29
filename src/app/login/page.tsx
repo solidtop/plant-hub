@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import LoginForm from "@/components/auth/LoginForm";
 import { cookies } from "next/headers";
-import { getUser } from "@/lib/users";
 import { redirect } from "next/navigation";
 import BackButton from "@/components/button/BackButton";
 
@@ -11,9 +10,8 @@ export const metadata: Metadata = {
 
 export default async function Login() {
   const jwt = cookies().get("token")?.value;
-  const user = await getUser(jwt);
 
-  if (user) {
+  if (jwt) {
     // As we're already logged in there's no need to login again
     redirect("/");
   }
