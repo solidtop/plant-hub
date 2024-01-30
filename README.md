@@ -1,10 +1,38 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
+
 First, make sure you have Node.js version 18.17 or above installed
 Then run the following command in your terminal to install dependencies:
+
 ```bash
 npm install
+```
+
+### Setup local MongoDB
+
+Make sure to download MongoDB Community server at: https://www.mongodb.com/try/download/community
+Then add the following url to .env file in the project:
+
+```bash
+MONGODB_URL=mongodb://localhost:27017/plant-hub
+```
+
+### JWT key
+
+Include a JWT key to the .env file like following
+
+```bash
+JWT_KEY=[YOUR-JWT-KEY]
+```
+
+### API key
+
+Head over to https://perenual.com/docs/api and follow the instructions to get a API key.
+Then include the key to the .env file in the project as following:
+
+```bash
+API_KEY=[YOUR-API-KEY]
 ```
 
 Run the development server:
